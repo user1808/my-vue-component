@@ -1,0 +1,13 @@
+@mixin focus-outline {
+  outline: 0.125rem solid black;
+}
+
+@mixin options-transition-hide-state {
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+@mixin options-transition-show-state {
+  transform: scaleY(1);
+  transform-origin: top;
+}

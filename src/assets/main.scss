@@ -1,0 +1,16 @@
+@use './colors.scss' as *;
+
+body {
+  font-family: 'JetBrains Mono', monospace, Verdana , Arial, sans-serif !important;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); 
+  gap: 1rem;
+  margin: 4rem 2rem;
+}
+
+button {
+  font-family: inherit;
+}
