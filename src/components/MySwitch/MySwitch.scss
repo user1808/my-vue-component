@@ -1,0 +1,78 @@
+@use 'sass:math';
+
+$thumbColor: white !default;
+$trackColor: grey !default;
+$width: 36px !default;
+$height: 14px !default;
+$thumbDiameter: $height * 1.4 !default;
+$insetThumbDiameter: $height * 0.8 !default;
+$transformShift: math.div($thumbDiameter, 2) - ($thumbDiameter * 0.1) !default;
+
+$standardThumbShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+$standardThumbHoverShadow: 0 0 1px 10px rgba(0, 0, 0, 0.06);
+$disabledThumbShadow: 0 1px 10px 0 rgba(0, 0, 0, 0.08), 0 4px 5px 0 rgba(0, 0, 0, 0.08);
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  &--disabled {
+    cursor: default;
+  }
+  &__track {
+    width: $width;
+    height: $height;
+    border-radius: 9999px;
+    background-color: gray;
+    &--active {
+      background-color: $trackColor;
+      opacity: 0.3;
+    }
+    &--disabled {
+      background-color: $trackColor;
+      opacity: 0.5;
+    }
+  }
+  &-control {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: $width;
+    height: $width;
+    transform: translateX(calc(-50% + $transformShift));
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    &__input {
+      opacity: 0;
+    }
+    &__thumb {
+      position: absolute;
+      width: $thumbDiameter;
+      height: $thumbDiameter;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: $standardThumbShadow;
+      &:hover {
+        box-shadow: $standardThumbHoverShadow;
+      }
+      &--active {
+        background-color: $thumbColor;
+      }
+      &--inset {
+        width: $insetThumbDiameter;
+        height: $insetThumbDiameter;
+        box-shadow: none;
+      }
+      &--disabled {
+        background-color: $thumbColor;
+        box-shadow: $disabledThumbShadow;
+        &:hover {
+          box-shadow: $disabledThumbShadow;
+        }
+      }
+    }
+  }
+  &-control--active {
+    transform: translate(calc(50% - $transformShift));
+  }
+}
