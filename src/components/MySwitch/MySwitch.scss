@@ -8,8 +8,10 @@ $thumbDiameter: $height * 1.4 !default;
 $insetThumbDiameter: $height * 0.8 !default;
 $transformShift: math.div($thumbDiameter, 2) - ($thumbDiameter * 0.1) !default;
 
-$standardThumbShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
-$standardThumbHoverShadow: 0 0 1px 10px rgba(0, 0, 0, 0.06);
+$thumbShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14);
+
+$standardThumbShadow: $thumbShadow, 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+$standardThumbHoverShadow: $thumbShadow, 0 0 1px 10px rgba(0, 0, 0, 0.06);
 $disabledThumbShadow: 0 1px 10px 0 rgba(0, 0, 0, 0.08), 0 4px 5px 0 rgba(0, 0, 0, 0.08);
 
 .switch {

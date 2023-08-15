@@ -1,6 +1,6 @@
 <template>
   <div>TEST</div>
-  <MySwitch v-model="value" color="red" />
+  <MySwitch v-model="value" />
   {{ value }}
 </template>
 
