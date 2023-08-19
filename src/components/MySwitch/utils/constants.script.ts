@@ -1,7 +1,9 @@
-import type { TSize, TInset, TColor } from '../types';
+import type { TColor, TSize, TInset } from './my-switch.types';
 
 const DEFAULT_HEIGHT: TSize = 14;
+const DEFAULT_INSET_HEIGHT: TSize = 24;
 const DEFAULT_WIDTH: TSize = 36;
+const DEFAULT_INSET_WIDTH: TSize = 42;
 
 const DEFAULT_INSET: TInset = false;
 
@@ -14,7 +16,9 @@ const DEFAULT_THUMB_COLOR: TColor = 'white';
 
 export default {
   DEFAULT_HEIGHT,
+  DEFAULT_INSET_HEIGHT,
   DEFAULT_WIDTH,
+  DEFAULT_INSET_WIDTH,
   DEFAULT_INSET,
   INSET_WIDTH_FACTOR,
   STANDARD_WIDTH_FACTOR,

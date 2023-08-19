@@ -7,16 +7,7 @@ $font-size: vars.$default-options-font-size !default;
   padding: vars.$option-half-vertical-padding 1rem vars.$option-half-vertical-padding 2rem;
   cursor: pointer;
   user-select: none;
-  color: var(--grey-700);
   transition: background-color 100ms linear;
-  &--active {
-    background-color: var(--gray-50);
-    color: black;
-  }
-  &--selected {
-    background-color: var(--grey-100);
-    color: var(--grey-800);
-  }
   &__text {
     display: block;
     overflow: hidden;
