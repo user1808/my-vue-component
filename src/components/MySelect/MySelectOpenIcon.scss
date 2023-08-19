@@ -1,0 +1,17 @@
+@use 'utils/variables.style.scss' as vars;
+
+.my-select-open-icon {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: vars.$select-icons-width;
+  padding: 0 vars.$select-open-icon-half-horizontal-padding;
+  transition: rotate 0.1s linear;
+  &--open {
+    rotate: 180deg;
+  }
+  &--disabled {
+    opacity: 0.5;
+  }
+}

@@ -9,5 +9,8 @@
       "@/*": ["./src/*"]
     },
     "strict": true,
+    "typeRoots": [
+      "./types"
+    ]
   }
 }

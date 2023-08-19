@@ -1,0 +1,111 @@
+@use 'utils/variables.style.scss' as vars;
+@use 'utils/mixins.style.scss' as mxs;
+
+$selected-font-size: vars.$default-selected-font-size !default;
+$options-font-size: vars.$default-options-font-size !default;
+$max-option-items: vars.$default-max-options-item !default;
+
+$options-height: calc($max-option-items * ($options-font-size + 2 * vars.$option-half-vertical-padding));
+
+$default-content-btn-r-padding: vars.$select-icons-width + 2 * vars.$select-open-icon-half-horizontal-padding;
+$clearable-content-btn-r-padding: $default-content-btn-r-padding + vars.$select-icons-width;
+
+.my-select {
+  &-content {
+    position: relative;
+    &-btn {
+      position: relative;
+      padding: 0.5rem $default-content-btn-r-padding 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: 1px solid black;
+      background-color: white;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow:
+        0 0.25rem 0.375rem -1px rgba(0, 0, 0, 0.1),
+        0 0.125rem 0.25rem -1px rgba(0, 0, 0, 0.06);
+      &:focus {
+        @include mxs.focus-outline;
+      }
+      &--open {
+        @include mxs.focus-outline;
+      }
+      &--disabled {
+        outline: 1px solid var(--grey-100);
+        background-color: var(--grey-50);
+        box-shadow: none;
+        cursor: default;
+      }
+      &--clearable {
+        padding-right: $clearable-content-btn-r-padding;
+        &:focus :nth-child(2) {
+          opacity: vars.$select-clear-icon-visible-opacity;
+        }
+        &:hover :nth-child(2) {
+          opacity: vars.$select-clear-icon-visible-opacity;
+        }
+      }
+      &__selected-value {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        height: $selected-font-size;
+        font-size: $selected-font-size;
+        line-height: $selected-font-size;
+      }
+    }
+    &-options {
+      overflow: auto;
+      position: absolute;
+      margin-top: 0.25rem;
+      padding: 0.25rem 0;
+      border-radius: 0.375rem;
+      width: 100%;
+      max-height: $options-height;
+      font-size: 0.875rem;
+      background-color: white;
+      box-shadow:
+        0 0.625rem 1rem -0.25rem rgba(0, 0, 0, 0.1),
+        0 0.25rem 0.375rem -0.125rem rgba(0, 0, 0, 0.05);
+      list-style: none;
+      &::-webkit-scrollbar {
+        width: 0.25rem;
+        &-track {
+          background: white;
+          margin: 0.25rem 0;
+        }
+        &-thumb {
+          background: var(--grey-300);
+          border-radius: 2rem;
+          &:hover {
+            background: var(--grey-400);
+          }
+        }
+      }
+    }
+  }
+}
+.options-transition {
+  &-leave-active {
+    transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1);
+  }
+  &-enter-active {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 1, 1);
+  }
+  &-leave-from {
+    @include mxs.options-transition-show-state;
+  }
+  &-enter-to {
+    @include mxs.options-transition-show-state;
+  }
+  &-leave-to {
+    @include mxs.options-transition-hide-state;
+  }
+  &-enter-from {
+    @include mxs.options-transition-hide-state;
+  }
+}
