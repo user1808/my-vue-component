@@ -1,9 +1,9 @@
 <template>
   <li
-    class="my-select-option"
+    class="my-select-option grey-700"
     :class="{
-      'my-select-option--active': active,
-      'my-select-option--selected': selected,
+      'bg-grey-50 black': active,
+      'bg-grey-100 grey-800': selected,
     }"
   >
     <span

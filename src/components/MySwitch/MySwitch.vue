@@ -35,55 +35,40 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import CONSTANTS from './constants/constants.script';
+import constants from './utils/constants.script';
 import type {
-  TModelValue,
+  TMySwitchProps,
   TColor,
+  TModelValue,
   TSize,
-  TInset,
-  TDisabled,
-} from './types';
+} from './utils/my-switch.types';
 
-const props = withDefaults(
-  defineProps<{
-    modelValue: TModelValue;
-    color?: TColor;
-    height?: TSize;
-    width?: TSize;
-    inset?: TInset;
-    disabled?: TDisabled;
-  }>(),
-  {
-    height: CONSTANTS.DEFAULT_HEIGHT,
-    width: CONSTANTS.DEFAULT_WIDTH,
-    inset: CONSTANTS.DEFAULT_INSET,
-  },
-);
+const props = withDefaults(defineProps<TMySwitchProps>(), {
+  height: constants.DEFAULT_HEIGHT,
+  width: constants.DEFAULT_WIDTH,
+  inset: constants.DEFAULT_INSET,
+});
+
+const computedWidth = computed<TSize>(() => {
+  return props.inset ? constants.DEFAULT_INSET_WIDTH : props.width;
+});
 
 const computedHeight = computed<TSize>(() => {
-  return props.inset
-    ? Math.min(
-        props.width * CONSTANTS.INSET_WIDTH_FACTOR,
-        props.height,
-      )
-    : Math.min(
-        props.width * CONSTANTS.STANDARD_WIDTH_FACTOR,
-        props.height,
-      );
+  return props.inset ? constants.DEFAULT_INSET_HEIGHT : props.height;
 });
 
 const computedTrackColor = computed<TColor>(() => {
   return props.disabled
-    ? CONSTANTS.DISABLED_COLOR
-    : props.color || CONSTANTS.DEFAULT_TRACK_COLOR;
+    ? constants.DISABLED_COLOR
+    : props.color || constants.DEFAULT_TRACK_COLOR;
 });
 
 const computedThumbColor = computed<TColor>(() => {
   return props.modelValue
     ? props.color && props.disabled
-      ? CONSTANTS.DISABLED_COLOR
-      : props.color || CONSTANTS.DEFAULT_THUMB_COLOR
-    : CONSTANTS.DEFAULT_THUMB_COLOR;
+      ? constants.DISABLED_COLOR
+      : props.color || constants.DEFAULT_THUMB_COLOR
+    : constants.DEFAULT_THUMB_COLOR;
 });
 
 const emits = defineEmits<{
@@ -98,25 +83,15 @@ const onSwitchClicked = () => {
 </script>
 
 <style scoped lang="scss">
-@use './constants/constants.style.scss' as *;
-
-$thumbColor: v-bind('computedThumbColor');
-$trackColor: v-bind('computedTrackColor');
-
-$width: calc(v-bind('$props.width') * 1px);
+$thumb-color: v-bind('computedThumbColor');
+$track-color: v-bind('computedTrackColor');
+$width: calc(v-bind('computedWidth') * 1px);
 $height: calc(v-bind('computedHeight') * 1px);
 
-$thumbDiameter: calc($height * $thumbDiameterFactor);
-$insetThumbDiameter: calc($height * $insetThumbDiameterFactor);
-$transformShift: calc($thumbDiameter * $transformShiftFactor);
-
 @use './MySwitch.scss' with (
-  $thumbColor: $thumbColor,
-  $trackColor: $trackColor,
+  $thumb-color: $thumb-color,
+  $track-color: $track-color,
   $width: $width,
-  $height: $height,
-  $thumbDiameter: $thumbDiameter,
-  $insetThumbDiameter: $insetThumbDiameter,
-  $transformShift: $transformShift
+  $height: $height
 );
 </style>
