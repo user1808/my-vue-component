@@ -1,33 +1,25 @@
 @use 'utils/variables.style.scss' as vars;
 
-$thumb-color: vars.$default-thumb-color !default;
-$track-color: vars.$default-track-color !default;
-$width: vars.$default-width !default;
-$height: vars.$default-height !default;
-
-$thumb-diameter: calc($height * vars.$thumb-diameter-factor);
-$inset-thumb-diameter: calc($height * vars.$inset-thumb-diameter-factor);
-$transform-shift: calc($thumb-diameter * vars.$transform-shift-factor);
-
 .switch {
   display: inline-flex;
   align-items: center;
+  position: relative;
   cursor: pointer;
   &--disabled {
     cursor: default;
   }
   &__track {
-    width: $width;
-    height: $height;
+    width: vars.$default-track-width;
+    height: vars.$default-track-height;
     border-radius: 9999px;
     background-color: gray;
-    &--active {
-      background-color: $track-color;
-      opacity: 0.3;
+    &--inset {
+      width: vars.$default-track-inset-width;
+      height: vars.$default-track-inset-height;
     }
-    &--disabled {
-      background-color: $track-color;
-      opacity: 0.5;
+    &--colorize-disabled {
+      background-color: gray !important;
+      opacity: 0.2;
     }
   }
   &-control {
@@ -35,41 +27,33 @@ $transform-shift: calc($thumb-diameter * vars.$transform-shift-factor);
     position: absolute;
     justify-content: center;
     align-items: center;
-    width: $width;
-    height: $width;
-    transform: translateX(calc(-50% + $transform-shift));
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
     &__input {
       opacity: 0;
     }
     &__thumb {
+      width: vars.$default-thumb-diameter;
+      height: vars.$default-thumb-diameter;
       position: absolute;
-      width: $thumb-diameter;
-      height: $thumb-diameter;
       background-color: white;
       border-radius: 100%;
       box-shadow: vars.$standard-thumb-shadow;
-      &:hover {
+      transform: translateX(- vars.$default-transform);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      &:hover:not(&--disabled) {
         box-shadow: vars.$standard-thumb-hover-shadow;
       }
       &--active {
-        background-color: $thumb-color;
+        transform: translateX(vars.$default-transform);
       }
       &--inset {
-        width: $inset-thumb-diameter;
-        height: $inset-thumb-diameter;
+        width: vars.$default-thumb-inset-diameter;
+        height: vars.$default-thumb-inset-diameter;
         box-shadow: none;
       }
       &--disabled {
-        background-color: $thumb-color;
         box-shadow: vars.$disabled-thumb-shadow;
-        &:hover {
-          box-shadow: vars.$disabled-thumb-shadow;
-        }
       }
     }
-  }
-  &-control--active {
-    transform: translate(calc(50% - $transform-shift));
   }
 }
