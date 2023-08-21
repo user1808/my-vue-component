@@ -16,9 +16,11 @@
           }"
           :disabled="disabled"
         >
-          <span class="my-select-content-btn__selected-value">
-            {{ getItemTitle(selectedItem) }}
-          </span>
+          <slot name="selected" :item="selectedItem">
+            <span class="my-select-content-btn__selected-value">
+              {{ getItemTitle(selectedItem) }}
+            </span>
+          </slot>
           <MySelectClearIcon
             :clearable="clearable"
             :disabled="disabled"
@@ -42,7 +44,9 @@
                 :selected="selected"
                 :font-size="optionsFontSize"
                 :item-title="getItemTitle(item)"
-              />
+              >
+                <slot name="option" :item="item"></slot>
+              </MySelectOption>
             </ListboxOption>
           </ListboxOptions>
         </Transition>
@@ -118,6 +122,11 @@ const onSelectClear = () => {
   selectedItem.value = null;
   emits('update:modelValue', null);
 };
+
+defineSlots<{
+  selected(props: { item: Absentable<T> }): any;
+  option(props: { item: T }): any;
+}>();
 </script>
 
 <style scoped lang="scss">

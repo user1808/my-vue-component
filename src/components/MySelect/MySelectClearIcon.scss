@@ -9,9 +9,9 @@
   padding: 0;
   display: flex;
   align-items: center;
-  width: 0;
   height: fit-content;
   transform: translateX(100%);
+  width: 0;
   transform-origin: right;
   opacity: 0;
   transition: {

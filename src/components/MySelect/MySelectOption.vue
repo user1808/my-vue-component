@@ -11,8 +11,9 @@
       :class="{
         'my-select-option__text--selected': selected,
       }"
-      >{{ itemTitle }}</span
     >
+      <slot> {{ itemTitle }} </slot>
+    </span>
   </li>
 </template>
 
@@ -20,6 +21,10 @@
 import type { TMySelectOptionProps } from './utils/my-select.types';
 
 defineProps<TMySelectOptionProps>();
+
+defineSlots<{
+  default(): any;
+}>();
 </script>
 
 <style scoped lang="scss">
