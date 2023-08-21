@@ -11,7 +11,7 @@
           'switch__track--colorize-disabled': disabled,
           'switch__track--inset': inset,
         },
-        !isColorHex && color && modelValue ? `bg-${color}` : '',
+        !isColorHex && color && modelValue ? `my-bg-${color}` : '',
       ]"
       :style="{
         backgroundColor: isColorHex && modelValue ? color : undefined,
