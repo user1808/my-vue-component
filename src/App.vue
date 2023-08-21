@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MySwitch v-model="switchValue" />
+    <MySwitch v-model="switchValue" color="blue-700" />
   </div>
   <div>
     <MySelect
