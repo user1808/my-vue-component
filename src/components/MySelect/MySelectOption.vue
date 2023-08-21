@@ -2,8 +2,8 @@
   <li
     class="my-select-option grey-700"
     :class="{
-      'bg-grey-50 black': active,
-      'bg-grey-100 grey-800': selected,
+      'my-bg-grey-50 my-black': active,
+      'my-bg-grey-100 my-grey-800': selected,
     }"
   >
     <span

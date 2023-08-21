@@ -10,7 +10,7 @@
           class="my-select-content-btn"
           :class="{
             'my-select-content-btn--open': open,
-            'my-select-content-btn--disabled outline-grey-100 bg-grey-50':
+            'my-select-content-btn--disabled my-outline-grey-100 my-bg-grey-50':
               disabled,
             'my-select-content-btn--clearable': clearable,
           }"
