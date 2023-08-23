@@ -2,8 +2,7 @@
   <MyIcon
     v-if="clearable"
     v-show="!disabled"
-    icon-alt="clear"
-    icon-src="https://api.iconify.design/heroicons:x-circle-20-solid.svg"
+    name="cancel"
     class="my-select-clear-icon"
     :class="{
       'my-select-clear-icon--placed': isItemSelected,

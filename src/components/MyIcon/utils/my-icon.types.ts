@@ -1,7 +1,9 @@
-type TIconSrc = string;
-type TIconAlt = string;
+export type TLibrary = string;
+type TName = string;
+export type TColor = string;
 
 export type TMyIconProps = {
-  iconSrc: TIconSrc;
-  iconAlt: TIconAlt;
+  library?: TLibrary;
+  name: TName;
+  color?: TColor;
 };

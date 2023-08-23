@@ -1,7 +1,7 @@
 <template>
   <MyIcon
-    icon-alt="chevron"
-    icon-src="https://api.iconify.design/heroicons:chevron-down.svg"
+    library="heroicons"
+    name="chevron-down"
     class="my-select-open-icon"
     :class="{
       'my-select-open-icon--open': open,
