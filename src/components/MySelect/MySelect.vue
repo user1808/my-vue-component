@@ -1,8 +1,7 @@
 <template>
   <div class="my-select">
     <Listbox
-      :model-value="selectedItem"
-      @update:model-value="onModelValueUpdate"
+      :model-value="getItemValue(selectedItem)"
       v-slot="{ open }"
     >
       <div class="my-select-content">
@@ -44,6 +43,7 @@
                 :selected="selected"
                 :font-size="optionsFontSize"
                 :item-title="getItemTitle(item)"
+                @click="chooseItem(item)"
               >
                 <slot name="option" :item="item"></slot>
               </MySelectOption>
@@ -113,7 +113,7 @@ const emits = defineEmits<{
   'update:modelValue': [value: Nullable<T>];
 }>();
 
-const onModelValueUpdate = (newValue: T) => {
+const chooseItem = (newValue: T) => {
   selectedItem.value = newValue;
   emits('update:modelValue', newValue);
 };

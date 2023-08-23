@@ -4,6 +4,7 @@
       class="my-icon__icon"
       :src="`https://api.iconify.design/${library}:${name}.svg${iconColor}`"
       :alt="name"
+      draggable="false"
     />
   </div>
 </template>

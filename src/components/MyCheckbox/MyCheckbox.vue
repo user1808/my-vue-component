@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import type {
   TMyCheckboxProps,
   TIndeterminate,
@@ -41,12 +41,23 @@ const props = withDefaults(defineProps<TMyCheckboxProps>(), {
   readonly: constants.DEFAULT_READONLY,
 });
 
-const checkboxIndeter = ref<TIndeterminate>(props.indeterminate);
+const emits = defineEmits<{
+  'update:modelValue': [newValue: boolean];
+}>();
+
+const indeterminateState = ref<TIndeterminate>(
+  props.indeterminate && typeof props.modelValue === 'undefined',
+);
+watchEffect(() => {
+  indeterminateState.value =
+    props.indeterminate && typeof props.modelValue === 'undefined';
+});
 
 const checkboxIcon = computed<TCheckboxIcon>(() => {
-  return checkboxIndeter.value
+  const model = props.modelValue;
+  return indeterminateState.value
     ? constants.INDETERMINATE_ICON_NAME
-    : props.modelValue
+    : model
     ? constants.CHECKED_ICON_NAME
     : constants.UNCHECKED_ICON_NAME;
 });
@@ -55,13 +66,9 @@ const checkboxColor = computed<Undefinedable<TColor>>(() => {
   return props.modelValue && !props.disabled ? props.color : '';
 });
 
-const emits = defineEmits<{
-  'update:modelValue': [newValue: boolean];
-}>();
-
 const onCheckboxClicked = () => {
   if (!props.disabled && !props.readonly) {
-    checkboxIndeter.value = false;
+    indeterminateState.value = false;
     emits(
       'update:modelValue',
       typeof props.modelValue === 'boolean'
