@@ -25,17 +25,17 @@ const meta: Meta<typeof MySelect> = {
     items: {
       control: false,
       description:
-        "This is an array of strings, booleans, numbers or objects. When utilizing objects, the component will require both 'item-value' and 'item-title'. It is required and is of generic type: T extends string | number | boolean | object.",
+        "This is an array of strings, booleans, numbers or objects. When utilizing objects, the component will require both 'itemValue' and 'itemTitle'. It is required and is of generic type: T extends string | number | boolean | object.",
     },
-    'item-value': {
+    itemValue: {
       description:
         "This refers to the property name of an object, which will later be used as the value within that object. It is of conditional type, that is 'keyof T' (if T type extends object) or 'never' (if T doesn't extend object)",
     },
-    'item-title': {
+    itemTitle: {
       description:
         "This refers to the property name of an object, which will later be used as the title for that object. It is of conditional type, that is 'keyof T' (if T type extends object) or 'never' (if T doesn't extend object)",
     },
-    'selected-font-size': {
+    selectedFontSize: {
       control: {
         type: 'range',
         min: 10,
@@ -45,7 +45,7 @@ const meta: Meta<typeof MySelect> = {
       description:
         "This represents the font size value for the selected item. It is of number type and a default value of 18. The component also inlcudes a template named 'selected', allowing you to adjust e.g. the font size using media queries",
     },
-    'options-font-size': {
+    optionsFontSize: {
       control: {
         type: 'range',
         min: 10,
@@ -55,7 +55,7 @@ const meta: Meta<typeof MySelect> = {
       description:
         "This represents the font size value for the items in select options. It is of number type and a default value of 16. The component also inlcudes a template named 'option', allowing you to adjust e.g. the font size using media queries",
     },
-    'max-option-items': {
+    maxOptionItems: {
       control: {
         type: 'range',
         min: 1,
@@ -63,7 +63,7 @@ const meta: Meta<typeof MySelect> = {
         step: 1,
       },
       description:
-        "This value determines the number of visible items when you open the select options. It is correlated with 'options-font-size' parameter. It is of number type with a default value of 5.",
+        "This value determines the number of visible items when you open the select options. It is correlated with 'optionsFontSize' parameter. It is of number type with a default value of 5.",
     },
     clearable: {
       control: 'boolean',
@@ -97,24 +97,24 @@ export const DefaultStory: Story = {
       <MySelect 
         v-model="modelValue"
         :items="args.items"
-        :item-title="args['item-title']"
-        :item-value="args['item-value']"
-        :selected-font-size="args['selected-font-size']"
-        :options-font-size="args['options-font-size']" 
-        :max-option-items="args['max-option-items']"
+        :itemTitle="args.itemTitle"
+        :itemValue="args.itemValue"
+        :selectedFontSize="args['selectedFontSize']"
+        :optionsFontSize="args['optionsFontSize']" 
+        :maxOptionItems="args['maxOptionItems']"
         :clearable="args.clearable"
         :disabled="args.disabled"
       />`,
   }),
   argTypes: {
-    'item-value': { control: false },
-    'item-title': { control: false },
+    itemValue: { control: false },
+    itemTitle: { control: false },
   },
   args: {
     items: [1, 2, 3, 4, 5, 6, 7, 8],
-    'selected-font-size': 18,
-    'options-font-size': 16,
-    'max-option-items': 5,
+    selectedFontSize: 18,
+    optionsFontSize: 16,
+    maxOptionItems: 5,
     clearable: false,
     disabled: false,
   },
@@ -126,11 +126,11 @@ export const ObjectItemsStory: Story = {
   argTypes: {
     modelValue: { table: { disable: true } },
     items: { table: { disable: true } },
-    'item-title': {
+    itemTitle: {
       control: 'select',
       options: [undefined, 'string', 'number', 'bool'],
     },
-    'item-value': {
+    itemValue: {
       control: 'select',
       options: [undefined, 'string', 'number', 'bool'],
     },
@@ -150,8 +150,8 @@ export const StringItemsStory: Story = {
   render: DefaultStory.render,
   argTypes: {
     ...ObjectItemsStory.argTypes,
-    'item-title': { table: { disable: true } },
-    'item-value': { table: { disable: true } },
+    itemTitle: { table: { disable: true } },
+    itemValue: { table: { disable: true } },
   },
   args: {
     ...DefaultStory.args,
