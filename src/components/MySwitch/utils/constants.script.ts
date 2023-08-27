@@ -5,10 +5,10 @@ import type {
   TReadonly,
 } from './my-switch.types';
 
-const DEFAULT_INDETERMINATE: TIndeterminate = false;
-const DEFAULT_INSET: TInset = false;
-const DEFAULT_DISABLED: TDisabled = false;
-const DEFAULT_READONLY: TReadonly = false;
+const DEFAULT_INDETERMINATE: TIndeterminate = false as const;
+const DEFAULT_INSET: TInset = false as const;
+const DEFAULT_DISABLED: TDisabled = false as const;
+const DEFAULT_READONLY: TReadonly = false as const;
 
 export default {
   DEFAULT_INDETERMINATE,

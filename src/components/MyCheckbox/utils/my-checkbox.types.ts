@@ -3,6 +3,7 @@ export type TIndeterminate = boolean;
 export type TColor = string;
 export type TDisabled = boolean;
 export type TReadonly = boolean;
+export type TRipple = boolean;
 
 export type TMyCheckboxProps = {
   modelValue: TModelValue;
@@ -10,6 +11,7 @@ export type TMyCheckboxProps = {
   color?: TColor;
   disabled?: TDisabled;
   readonly?: TReadonly;
+  ripple?: TRipple;
 };
 
 export type TCheckboxIcon =

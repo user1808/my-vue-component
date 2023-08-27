@@ -6,9 +6,13 @@
       'my-checkbox--readonly': readonly,
     }"
     @click="onCheckboxClicked"
+    v-ripple="ripple && !disabled"
   >
     <input
       class="my-checkbox__input"
+      :class="{
+        'my-checkbox__input--disabled': disabled,
+      }"
       type="checkbox"
       :value="!!modelValue"
     />
@@ -34,11 +38,15 @@ import type {
 } from './utils/my-checkbox.types';
 import constants from './utils/constants.script';
 import MyIcon from '../MyIcon';
+import { useRippleDirective } from '@/composables/useRippleDirective';
+
+const { vRipple } = useRippleDirective();
 
 const props = withDefaults(defineProps<TMyCheckboxProps>(), {
   indeterminate: constants.DEFAULT_INDETERMINATE,
   disabled: constants.DEFAULT_DISABLED,
   readonly: constants.DEFAULT_READONLY,
+  ripple: constants.DEFAULT_RIPPLE,
 });
 
 const emits = defineEmits<{

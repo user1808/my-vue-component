@@ -5,7 +5,7 @@ import MyCheckbox from '@/components/MyCheckbox';
 import { colors } from '@/assets/colors/colors';
 
 const meta: Meta<typeof MyCheckbox> = {
-  title: 'Components/Checkbox',
+  title: 'Components/MyCheckbox',
   tags: ['autodocs'],
   parameters: { controls: { sort: 'alpha' } },
   component: MyCheckbox,
@@ -35,12 +35,18 @@ const meta: Meta<typeof MyCheckbox> = {
       description:
         'This value sets the readonly state for the checkbox. It is of boolean type.',
     },
+    ripple: {
+      control: 'boolean',
+      description:
+        'This boolean value determines whether checkbox have ripple effect. Default value is true',
+    },
   },
   args: {
     modelValue: undefined,
     indeterminate: false,
     disabled: false,
     readonly: false,
+    ripple: true,
   },
 };
 
@@ -62,38 +68,28 @@ export const DefaultStory: Story = {
         :color="args.color"
         :disabled="args.disabled"
         :readonly="args.readonly"
+        :ripple="args.ripple"
       />`,
   }),
 };
 
-export const VModelAlwaysUndefinedStory: Story = {
-  name: 'V-Model Undefined',
-  render: (args) => ({
-    components: { MyCheckbox },
-    setup() {
-      const model = ref(args.modelValue);
-      return { args, model };
-    },
-    template: `
-      <MyCheckbox
-        :model-value="model"
-        :indeterminate="args.indeterminate"
-        :color="args.color"
-        :disabled="args.disabled"
-        :readonly="args.readonly"
-      />`,
-  }),
+export const IndeterminateStory: Story = {
+  name: 'Indeterminate',
+  render: DefaultStory.render,
   argTypes: {
     modelValue: { table: { disable: true } },
   },
-  args: DefaultStory.args,
+  args: {
+    ...DefaultStory.args,
+    indeterminate: true,
+  },
 };
 
 export const ColorSelectStory: Story = {
   name: 'Color Select',
   render: DefaultStory.render,
   argTypes: {
-    ...VModelAlwaysUndefinedStory.argTypes,
+    ...IndeterminateStory.argTypes,
     indeterminate: { table: { disable: true } },
     color: {
       options: Object.keys(colors),

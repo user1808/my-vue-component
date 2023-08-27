@@ -1,0 +1,61 @@
+@use './utils/variables.style.scss' as vars;
+
+.my-btn {
+  $myBtnSelector: &;
+
+  display: flex;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  border: 0;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.5em;
+  box-shadow: vars.$default-box-shadow;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+
+  transition: {
+    property: box-shadow;
+    duration: 0.25s;
+    timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover:not(&--disabled) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 0 0);
+    box-shadow: vars.$hover-box-shadow;
+    #{$myBtnSelector}__content--hover {
+      opacity: 1;
+    }
+  }
+
+  &__content--hover {
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.6;
+  }
+
+  &:active:not(&--disabled) {
+    box-shadow: vars.$active-box-shadow;
+  }
+
+  &--flat {
+    box-shadow: none !important;
+    &:hover {
+      box-shadow: none !important;
+    }
+  }
+
+  &--disable-hover-color:hover {
+    background-image: none !important;
+  }
+
+  &--outlined {
+    outline: 1px solid black;
+  }
+
+  &--disabled {
+    cursor: default;
+    color: vars.$disabled-color;
+    background-color: vars.$disabled-bg-color;
+  }
+}

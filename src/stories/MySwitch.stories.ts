@@ -73,35 +73,23 @@ export const DefaultStory: Story = {
   }),
 };
 
-export const VModelAlwaysUndefinedStory: Story = {
-  name: 'V-Model Undefined',
-  render: (args) => ({
-    components: { MySwitch },
-    setup() {
-      const model = ref(args.modelValue);
-      return { args, model };
-    },
-    template: `
-      <MySwitch 
-        :model-value="model"
-        :indeterminate="args.indeterminate"
-        :color="args.color"  
-        :disabled="args.disabled"
-        :readonly="args.readonly"
-        :inset="args.inset"
-      />`,
-  }),
+export const IndeterminateStory: Story = {
+  name: 'Indeterminate',
+  render: DefaultStory.render,
   argTypes: {
     modelValue: { table: { disable: true } },
   },
-  args: DefaultStory.args,
+  args: {
+    ...DefaultStory.args,
+    indeterminate: true,
+  },
 };
 
 export const ColorSelectStory: Story = {
   name: 'Color Select',
   render: DefaultStory.render,
   argTypes: {
-    ...VModelAlwaysUndefinedStory.argTypes,
+    ...IndeterminateStory.argTypes,
     indeterminate: { table: { disable: true } },
     color: {
       options: Object.keys(colors),

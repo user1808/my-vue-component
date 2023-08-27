@@ -5,6 +5,7 @@
       'my-bg-grey-50 my-black': active,
       'my-bg-grey-100 my-grey-800': selected,
     }"
+    v-ripple
   >
     <div
       class="my-select-option__text"
@@ -20,7 +21,10 @@
 </template>
 
 <script setup lang="ts">
+import { useRippleDirective } from '@/composables/useRippleDirective';
 import type { TMySelectOptionProps } from './utils/my-select.types';
+
+const { vRipple } = useRippleDirective();
 
 defineProps<TMySelectOptionProps>();
 
