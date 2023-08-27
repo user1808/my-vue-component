@@ -37,30 +37,21 @@ const meta: Meta<typeof MySelect> = {
     },
     selectedFontSize: {
       control: {
-        type: 'range',
-        min: 10,
-        max: 30,
-        step: 1,
+        type: 'number',
       },
       description:
         "This represents the font size value for the selected item. It is of number type and a default value of 18. The component also inlcudes a template named 'selected', allowing you to adjust e.g. the font size using media queries",
     },
     optionsFontSize: {
       control: {
-        type: 'range',
-        min: 10,
-        max: 30,
-        step: 1,
+        type: 'number',
       },
       description:
         "This represents the font size value for the items in select options. It is of number type and a default value of 16. The component also inlcudes a template named 'option', allowing you to adjust e.g. the font size using media queries",
     },
     maxOptionItems: {
       control: {
-        type: 'range',
-        min: 1,
-        max: 8,
-        step: 1,
+        type: 'number',
       },
       description:
         "This value determines the number of visible items when you open the select options. It is correlated with 'optionsFontSize' parameter. It is of number type with a default value of 5.",
@@ -74,6 +65,12 @@ const meta: Meta<typeof MySelect> = {
       control: 'boolean',
       description:
         'This value disables the select. It is of boolean type',
+    },
+    selected: {
+      description: 'Slot for selected item',
+    },
+    option: {
+      description: 'Slot for items in select options',
     },
   },
 };
@@ -134,6 +131,8 @@ export const ObjectItemsStory: Story = {
       control: 'select',
       options: [undefined, 'string', 'number', 'bool'],
     },
+    selected: { table: { disable: true } },
+    option: { table: { disable: true } },
   },
   args: {
     ...DefaultStory.args,
@@ -166,5 +165,45 @@ export const BooleanItemsStory: Story = {
   args: {
     ...DefaultStory.args,
     items: [true, false, false, true, false],
+  },
+};
+
+export const SlotsStory: Story = {
+  name: 'Slots',
+  // @ts-expect-error
+  render: (args) => ({
+    components: { MySelect },
+    setup() {
+      // @ts-expect-error
+      const items = args.items;
+      const modelValue = ref(items[0]);
+      return { args, modelValue };
+    },
+    template: `
+      <MySelect 
+        v-model="modelValue"
+        :items="args.items"
+      >
+        <template #selected="{ item }">
+          <selected v-if="args.selected" v-html="args.selected" />
+        </template>
+        <template #option="{ item }">
+          <option v-if="args.option" v-html="args.option" />
+        </template>
+      </MySelect>`,
+  }),
+  argTypes: {
+    ...StringItemsStory.argTypes,
+    maxOptionItems: { table: { disable: true } },
+    optionsFontSize: { table: { disable: true } },
+    selectedFontSize: { table: { disable: true } },
+    selected: { control: 'text' },
+    option: { control: 'text' },
+  },
+  args: {
+    ...DefaultStory.args,
+    items: ['one', 'two', 'three'],
+    selected: '<span style="font-size: 14px">Selected</span>',
+    option: '<span style="font-size: 16px">Option</span>',
   },
 };
