@@ -1,3 +1,4 @@
+@use 'sass:math';
 @use 'utils/variables.style.scss' as vars;
 
 .switch {
@@ -17,9 +18,9 @@
       width: vars.$default-track-inset-width;
       height: vars.$default-track-inset-height;
     }
-    &--colorize-disabled {
+    &--disabled {
       background-color: gray !important;
-      opacity: 0.2;
+      opacity: 0.3;
     }
   }
   &-control {
@@ -30,6 +31,10 @@
     width: 100%;
     &__input {
       opacity: 0;
+      cursor: pointer;
+      &--disabled {
+        cursor: default;
+      }
     }
     &__thumb {
       width: vars.$default-thumb-diameter;
@@ -39,19 +44,30 @@
       border-radius: 100%;
       box-shadow: vars.$standard-thumb-shadow;
       transform: translateX(- vars.$default-transform);
-      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: {
+        property: transform, width, height;
+        duration: 0.2s;
+        timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      };
       &:hover:not(&--disabled) {
         box-shadow: vars.$standard-thumb-hover-shadow;
       }
       &--active {
         transform: translateX(vars.$default-transform);
       }
+      &--indeterminate {
+        transform: translateX(0);
+      }
       &--inset {
-        width: vars.$default-thumb-inset-diameter;
-        height: vars.$default-thumb-inset-diameter;
+        width: math.div(vars.$default-thumb-inset-diameter, 2);
+        height: math.div(vars.$default-thumb-inset-diameter, 2);
         box-shadow: none;
       }
-      &--disabled {
+      &--inset-active {
+        width: vars.$default-thumb-inset-diameter;
+        height: vars.$default-thumb-inset-diameter; 
+      }
+      &--disabled:not(&--inset) {
         box-shadow: vars.$disabled-thumb-shadow;
       }
     }

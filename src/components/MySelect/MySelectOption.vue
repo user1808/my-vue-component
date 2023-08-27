@@ -6,14 +6,16 @@
       'my-bg-grey-100 my-grey-800': selected,
     }"
   >
-    <span
+    <div
       class="my-select-option__text"
       :class="{
         'my-select-option__text--selected': selected,
       }"
     >
-      <slot> {{ itemTitle }} </slot>
-    </span>
+      <slot>
+        <span>{{ itemTitle }}</span>
+      </slot>
+    </div>
   </li>
 </template>
 
