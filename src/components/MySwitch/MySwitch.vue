@@ -17,7 +17,14 @@
         backgroundColor: isColorHex && modelValue ? color : undefined,
       }"
     />
-    <div class="switch-control">
+    <div
+      class="switch-control"
+      :class="{
+        'switch-control--active': modelValue,
+        'switch-control--indeterminate': indeterminateState,
+      }"
+      v-ripple:absolute="!disabled"
+    >
       <input
         class="switch-control__input"
         :class="{ 'switch-control__input--disabled': disabled }"
@@ -28,14 +35,11 @@
       <span
         class="switch-control__thumb"
         :class="{
-          'switch-control__thumb--active': modelValue,
-          'switch-control__thumb--indeterminate': indeterminateState,
           'switch-control__thumb--inset': inset,
           'switch-control__thumb--inset-active': inset && modelValue,
           'switch-control__thumb--disabled': disabled,
         }"
-      >
-      </span>
+      />
     </div>
   </div>
 </template>
@@ -49,8 +53,10 @@ import type {
   TIndeterminate,
 } from './utils/my-switch.types';
 import { computed, ref, watchEffect } from 'vue';
+import { useRippleDirective } from '@/composables/useRippleDirective';
 
 const { isHexColorValue } = useColor();
+const { vRipple } = useRippleDirective();
 
 const props = withDefaults(defineProps<TMySwitchProps>(), {
   indeterminate: constants.DEFAULT_INDETERMINATE,
