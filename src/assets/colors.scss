@@ -1,0 +1,13 @@
+@use './colors/colors.variables.scss' as colors;
+
+@each $name, $hex in colors.$colors {
+  .my-#{$name} {
+    color: $hex !important;
+  }
+  .my-bg-#{$name} {
+    background-color: $hex !important;
+  }
+  .my-outline-#{$name} {
+    outline-color: $hex !important;
+  }
+}

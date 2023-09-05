@@ -1,53 +1,34 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
-import TheWelcome from './components/TheWelcome.vue';
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
+  <div>
+    <MySelect
+      v-model="selectedItem"
+      :items="selectItems"
+      :options-font-size="selectSize"
+      clearable
     />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
+  <div>
+    <MySwitch v-model="switchValue" color="blue-700" />
+  </div>
+  <div>
+    <MyCheckbox v-model="checkboxValue" color="#fa1" />
+  </div>
+  <div>
+    <MyIcon library="solar" name="4k-outline" />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup lang="ts">
+import { ref } from 'vue';
+import MySwitch from './components/MySwitch';
+import MySelect from './components/MySelect';
+import MyCheckbox from './components/MyCheckbox';
+import MyIcon from './components/MyIcon';
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+const switchValue = ref<boolean>(false);
+const checkboxValue = ref(false);
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+const selectItems = [11111, 222222, 3333333, 444444, 555555, 6666666];
+const selectSize = ref(23);
+const selectedItem = ref(selectItems[3]);
+</script>

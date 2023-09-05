@@ -1,0 +1,32 @@
+@use 'utils/variables.style.scss' as vars;
+
+.my-select-clear-icon {
+  right: vars.$select-icons-width + 2 * vars.$select-open-icon-half-horizontal-padding;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  transform: translateX(100%);
+  width: 0;
+  transform-origin: right;
+  opacity: 0;
+  transition: {
+    property: transform, opacity, width;
+    duration: 0.15s;
+    timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  &--placed {
+    transform: translateX(0);
+    width: vars.$select-icons-width;
+  }
+  &--visible {
+    opacity: vars.$select-clear-icon-visible-opacity;
+  }
+  &:hover {
+    opacity: vars.$select-clear-icon-hover-opacity !important;
+  }
+}

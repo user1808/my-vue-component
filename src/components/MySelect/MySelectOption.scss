@@ -1,0 +1,23 @@
+@use 'utils/variables.style.scss' as vars;
+
+$font-size: vars.$default-options-font-size !default;
+
+.my-select-option {
+  position: relative;
+  padding: vars.$option-half-vertical-padding 1rem vars.$option-half-vertical-padding 2rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 100ms linear;
+  &__text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: $font-size;
+    font-size: $font-size;
+    line-height: $font-size;
+    &--selected {
+      font-weight: 700;
+    }
+  }
+}

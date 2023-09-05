@@ -1,0 +1,79 @@
+@use 'sass:math';
+@use 'utils/variables.style.scss' as vars;
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  &--disabled {
+    cursor: default;
+  }
+  &__track {
+    width: vars.$default-track-width;
+    height: vars.$default-track-height;
+    border-radius: 9999px;
+    background-color: gray;
+    &--inset {
+      width: vars.$default-track-inset-width;
+      height: vars.$default-track-inset-height;
+    }
+    &--disabled {
+      background-color: gray !important;
+      opacity: 0.3;
+    }
+  }
+  &-control {
+    display: flex;
+    position: absolute;
+    width: vars.$default-thumb-diameter * 2;
+    height: vars.$default-thumb-diameter * 2;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    transform: translateX(- vars.$default-transform);
+    transition: {
+      property: transform, width, height;
+      duration: 0.2s;
+      timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    };
+    &--indeterminate {
+      transform: translateX(0);
+    }
+    &--active {
+      transform: translateX(vars.$default-transform);
+    }
+    &__input {
+      opacity: 0;
+      cursor: pointer;
+      &--disabled {
+        cursor: default;
+      }
+    }
+    &__thumb {
+      position: absolute;
+      width: vars.$default-thumb-diameter;
+      height: vars.$default-thumb-diameter;
+      background-color: white;
+      border-radius: 100%;
+      box-shadow: vars.$standard-thumb-shadow;
+      transition: inherit;
+      &:hover:not(&--disabled) {
+        box-shadow: vars.$standard-thumb-hover-shadow;
+      }
+      &--inset {
+        width: math.div(vars.$default-thumb-inset-diameter, 2);
+        height: math.div(vars.$default-thumb-inset-diameter, 2);
+        box-shadow: none;
+      }
+      &--inset-active {
+        width: vars.$default-thumb-inset-diameter;
+        height: vars.$default-thumb-inset-diameter; 
+      }
+      &--disabled {
+        box-shadow: vars.$disabled-thumb-shadow;
+      }
+    }
+  }
+}
