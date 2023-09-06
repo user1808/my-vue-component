@@ -8,6 +8,7 @@ $font-size: vars.$default-options-font-size !default;
   cursor: pointer;
   user-select: none;
   transition: background-color 100ms linear;
+  -webkit-tap-highlight-color: transparent;
   &__text {
     display: block;
     overflow: hidden;

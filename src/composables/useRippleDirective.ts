@@ -7,8 +7,8 @@ import { useColor } from './useColor';
  * arg - there, you define the position the target should have during the ripple effect (relative is default one).
  *       If it didn't have this position before the effect occured, it will be adjusted.
  * modifiers - you can input multiple values there, but only two of them are significant.
- *             If you provide a numeric value, it will determine the duration of the ripple effect.
- *             If you provide text, it will be treated as the event that triggers the ripple effect.
+ *             If you provide a numeric value, it will determine the duration of the ripple effect (400ms is default).
+ *             If you provide text, it will be treated as the event that triggers the ripple effect (mousedown is default).
  * value - there, you can input a boolean value that determines whether the ripple effect will occur or not.
  */
 
@@ -29,7 +29,7 @@ type TAddRemoveRippleEffectArgs = {
 };
 
 // Events list when ripple effect can start
-const allowedEvents = ['mousedown'] as const;
+const allowedEvents = ['mousedown', 'touchstart'] as const;
 type TAllowedEvents = (typeof allowedEvents)[number];
 const isAllowedEvent = (event: string): event is TAllowedEvents => {
   return allowedEvents.includes(event as TAllowedEvents);
@@ -47,6 +47,10 @@ const isAllowedPosition = (
 // Riple consts
 const RIPPLE_CLASS = 'my-ripple' as const;
 const RIPLE_WRAPPER_CLASS = 'my-ripple-wrapper' as const;
+const RIPLE_MOUSE_WRAPPER_CLASS =
+  `${RIPLE_WRAPPER_CLASS}-mouse` as const;
+const RIPLE_TOUCH_WRAPPER_CLASS =
+  `${RIPLE_WRAPPER_CLASS}-touch` as const;
 const POSITION_ATTR = 'previous-position' as const;
 
 const { parseRGBAString, calculateContrast, rgbaToRgb } = useColor();
@@ -73,7 +77,7 @@ class RippleEffect {
   };
 
   public static rippleEffect = (
-    event: MouseEvent,
+    event: MouseEvent | TouchEvent,
     targetElement: HTMLElement,
     directiveBinding: DirectiveBinding,
     modifiers: TRippleModifiers,
@@ -82,16 +86,29 @@ class RippleEffect {
     const width = targetElement.offsetWidth;
     const height = targetElement.offsetHeight;
 
-    const xPos = event.clientX - rect.left;
-    const yPos = event.clientY - rect.top;
+    let xPos = 0;
+    let yPos = 0;
+
+    if (event instanceof MouseEvent) {
+      if (this.isTouchRippleExist(targetElement)) return;
+      xPos = event.clientX - rect.left;
+      yPos = event.clientY - rect.top;
+    } else {
+      const firstTouch = event.targetTouches.item(0);
+      if (!firstTouch) return;
+      xPos = firstTouch.clientX - rect.left;
+      yPos = firstTouch.clientY - rect.top;
+    }
 
     const xMaxDist = Math.max(xPos, width - xPos);
     const yMaxDist = Math.max(yPos, height - yPos);
 
     const rippleRadius = Math.sqrt(xMaxDist ** 2 + yMaxDist ** 2);
 
-    const { ripple, rippleWrapper } =
-      this.createRippleElements(modifiers);
+    const { ripple, rippleWrapper } = this.createRippleElements(
+      modifiers,
+      event,
+    );
 
     this.setRippleBackgroundColor(ripple, targetElement);
 
@@ -124,13 +141,14 @@ class RippleEffect {
 
       targetElement.removeEventListener('mouseup', clearRipple);
       targetElement.removeEventListener('mouseleave', clearRipple);
+      targetElement.removeEventListener('touchend', clearRipple);
 
       if (targetElement.hasAttribute(POSITION_ATTR)) {
         setTimeout(() => {
           const clearPosition = !Array.from(
             targetElement.children,
           ).find((element: Element) => {
-            return element.className === RIPLE_WRAPPER_CLASS;
+            return element.className.includes(RIPLE_WRAPPER_CLASS);
           });
 
           if (clearPosition) {
@@ -142,21 +160,31 @@ class RippleEffect {
       }
     };
 
-    if (modifiers.event === 'mousedown') {
-      targetElement.addEventListener('mouseup', clearRipple);
-      targetElement.addEventListener('mouseleave', clearRipple);
-    } else {
-      clearRipple();
+    switch (modifiers.event) {
+      case 'mousedown':
+        targetElement.addEventListener('mouseup', clearRipple);
+        targetElement.addEventListener('mouseleave', clearRipple);
+        break;
+      case 'touchstart':
+        targetElement.addEventListener('touchend', clearRipple);
+        break;
+      default:
+        clearRipple();
     }
   };
 
   private static createRippleElements = (
     modifiers: TRippleModifiers,
+    event: MouseEvent | TouchEvent,
   ): TRippleElements => {
     const ripple = document.createElement('div');
     const rippleWrapper = document.createElement('div');
     ripple.className = RIPPLE_CLASS;
-    rippleWrapper.className = RIPLE_WRAPPER_CLASS;
+    if (event instanceof MouseEvent) {
+      rippleWrapper.className = RIPLE_MOUSE_WRAPPER_CLASS;
+    } else {
+      rippleWrapper.className = RIPLE_TOUCH_WRAPPER_CLASS;
+    }
 
     ripple.style.transition = `all ${modifiers.transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
 
@@ -215,10 +243,18 @@ class RippleEffect {
       ripple.style.backgroundColor = whiteBg;
     }
   };
+
+  private static isTouchRippleExist = (
+    target: HTMLElement,
+  ): boolean => {
+    return !!Array.from(target.children).find((element: Element) => {
+      return element.className === RIPLE_TOUCH_WRAPPER_CLASS;
+    });
+  };
 }
 
 export const useRippleDirective = () => {
-  let rippleEffectListener: (event: MouseEvent) => void;
+  let rippleEffectListener: (event: MouseEvent | TouchEvent) => void;
 
   const addRippleEffect = ({
     target,

@@ -24,6 +24,7 @@
         'switch-control--indeterminate': indeterminateState,
       }"
       v-ripple:absolute="!disabled"
+      v-ripple:absolute.touchstart="!disabled"
     >
       <input
         class="switch-control__input"

@@ -6,6 +6,7 @@
       'my-bg-grey-100 my-grey-800': selected,
     }"
     v-ripple
+    v-ripple.touchstart
   >
     <div
       class="my-select-option__text"
