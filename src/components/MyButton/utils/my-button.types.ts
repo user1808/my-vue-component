@@ -6,6 +6,7 @@ export type TRipple = boolean;
 export type TDisabled = boolean;
 type TBgColor = string;
 type TColor = string;
+export type TBgColorVariant = 'background' | 'outline';
 
 export type TMyButtonProps = {
   flat?: TFlat;
@@ -16,4 +17,5 @@ export type TMyButtonProps = {
   disabled?: TDisabled;
   bgColor?: TBgColor;
   color?: TColor;
+  bgColorVariant?: TBgColorVariant;
 };

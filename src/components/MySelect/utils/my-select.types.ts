@@ -11,6 +11,7 @@ type TIsItemSelected = boolean;
 type TActive = boolean;
 type TSelected = boolean;
 type TItemTitle = unknown;
+export type TRipple = boolean;
 
 export type TMySelectProps<T> = {
   modelValue?: Nullable<T>;
@@ -22,6 +23,7 @@ export type TMySelectProps<T> = {
   maxOptionItems?: TMaxOptionItems;
   clearable?: TClearable;
   disabled?: TDisabled;
+  ripple?: TRipple;
 };
 
 export type TMySelectClearIconProps = {
@@ -41,4 +43,5 @@ export type TMySelectOptionProps = {
   selected: TSelected;
   itemTitle: TItemTitle;
   fontSize: TFontSize;
+  ripple: TRipple;
 };

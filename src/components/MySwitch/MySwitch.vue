@@ -23,8 +23,8 @@
         'switch-control--active': modelValue,
         'switch-control--indeterminate': indeterminateState,
       }"
-      v-ripple:absolute="!disabled"
-      v-ripple:absolute.touchstart="!disabled"
+      v-ripple:absolute="ripple && !disabled"
+      v-ripple:absolute.touchstart="ripple && !disabled"
     >
       <input
         class="switch-control__input"
@@ -64,6 +64,7 @@ const props = withDefaults(defineProps<TMySwitchProps>(), {
   disabled: constants.DEFAULT_DISABLED,
   readonly: constants.DEFAULT_READONLY,
   inset: constants.DEFAULT_INSET,
+  ripple: constants.DEFAULT_RIPPLE,
 });
 
 const emits = defineEmits<{

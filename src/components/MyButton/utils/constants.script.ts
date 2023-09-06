@@ -5,6 +5,7 @@ import type {
   TOutlined,
   TRipple,
   TDisabled,
+  TBgColorVariant,
 } from './my-button.types';
 
 const DEFAULT_FLAT: TFlat = false as const;
@@ -15,6 +16,7 @@ const DEFAULT_CONTENT_HOVER_OPACITY: TContentHoverOpacity =
 const DEFAULT_OUTLINED: TOutlined = false as const;
 const DEFAULT_RIPPLE: TRipple = true as const;
 const DEFAULT_DISABLED: TDisabled = false as const;
+const DEFAULT_VARIANT: TBgColorVariant = 'background' as const;
 
 export default {
   DEFAULT_FLAT,
@@ -23,4 +25,5 @@ export default {
   DEFAULT_OUTLINED,
   DEFAULT_RIPPLE,
   DEFAULT_DISABLED,
+  DEFAULT_VARIANT,
 };

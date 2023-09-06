@@ -48,6 +48,16 @@ const meta: Meta<typeof MyButton> = {
       description:
         'This value changes color of button content (text). It is of string type, however to work correctly it should be either the hex value of color or a custom color name that is available in the selection within the "Color Select" story',
     },
+    default: {
+      description:
+        'Slot for button content. It can be either text or some html element.',
+    },
+    bgColorVariant: {
+      options: ['background', 'outline'],
+      control: { type: 'radio' },
+      description:
+        'This value determines whether the background or outline of the button should have the chosen background color. Default value is background.',
+    },
   },
   args: {
     flat: false,
@@ -56,6 +66,7 @@ const meta: Meta<typeof MyButton> = {
     outlined: false,
     ripple: true,
     disabled: false,
+    bgColorVariant: 'background',
   },
 };
 
@@ -78,6 +89,8 @@ export const DefaultStory: Story = {
         :disabled="args.disabled"
         :bg-color="args.bgColor"
         :color="args.color"
+        :ripple="args.ripple"
+        :bg-color-variant="args.bgColorVariant"
       />`,
   }),
 };
