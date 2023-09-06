@@ -1,6 +1,7 @@
 <template>
   <button
     v-ripple="ripple && !disabled"
+    v-ripple.touchstart="ripple && !disabled"
     class="my-btn"
     :class="[
       {
