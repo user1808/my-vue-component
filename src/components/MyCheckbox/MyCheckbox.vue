@@ -7,6 +7,7 @@
     }"
     @click="onCheckboxClicked"
     v-ripple="ripple && !disabled"
+    v-ripple.touchstart="ripple && !disabled"
   >
     <input
       class="my-checkbox__input"
