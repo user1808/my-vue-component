@@ -52,6 +52,12 @@ const meta: Meta<typeof MyButton> = {
       description:
         'Slot for button content. It can be either text or some html element.',
     },
+    bgColorVariant: {
+      options: ['background', 'outline'],
+      control: { type: 'radio' },
+      description:
+        'This value determines whether the background or outline of the button should have the chosen background color. Default value is background.',
+    },
   },
   args: {
     flat: false,
@@ -60,6 +66,7 @@ const meta: Meta<typeof MyButton> = {
     outlined: false,
     ripple: true,
     disabled: false,
+    bgColorVariant: 'background',
   },
 };
 
@@ -83,6 +90,7 @@ export const DefaultStory: Story = {
         :bg-color="args.bgColor"
         :color="args.color"
         :ripple="args.ripple"
+        :bg-color-variant="args.bgColorVariant"
       />`,
   }),
 };
