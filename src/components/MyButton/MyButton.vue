@@ -10,11 +10,11 @@
         'my-btn--outlined': outlined,
         'my-btn--disabled': disabled,
       },
-      !isBgColorHex && bgColor ? `my-bg-${bgColor}` : '',
+      bgColorClass,
       !isColorHex && color ? `my-${color}` : '',
     ]"
     :style="{
-      backgroundColor: isBgColorHex ? bgColor : undefined,
+      ...bgColorStyle,
       color: isColorHex ? color : undefined,
     }"
   >
@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, type CSSProperties } from 'vue';
 
 import type { TMyButtonProps } from './utils/my-button.types';
 import constants from './utils/constants.script';
@@ -42,10 +42,39 @@ const props = withDefaults(defineProps<TMyButtonProps>(), {
   outlined: constants.DEFAULT_OUTLINED,
   ripple: constants.DEFAULT_RIPPLE,
   disabled: constants.DEFAULT_DISABLED,
+  bgColorVariant: constants.DEFAULT_VARIANT,
 });
 
 const isBgColorHex = computed(() => isHexColorValue(props.bgColor));
 const isColorHex = computed(() => isHexColorValue(props.color));
+
+const bgColorClass = computed(() => {
+  if (!isBgColorHex.value && props.bgColor) {
+    switch (props.bgColorVariant) {
+      case 'background':
+        return `my-bg-${props.bgColor}`;
+      case 'outline':
+        return `my-outline-${props.bgColor}`;
+    }
+  }
+  return '';
+});
+
+const bgColorStyle = computed<Undefinedable<CSSProperties>>(() => {
+  if (isBgColorHex.value) {
+    switch (props.bgColorVariant) {
+      case 'background':
+        return {
+          backgroundColor: props.bgColor,
+        };
+      case 'outline':
+        return {
+          outlineColor: props.bgColor,
+        };
+    }
+  }
+  return undefined;
+});
 </script>
 
 <style scoped lang="scss">
