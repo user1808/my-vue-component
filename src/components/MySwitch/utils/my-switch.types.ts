@@ -4,6 +4,7 @@ type TColor = string;
 export type TDisabled = boolean;
 export type TReadonly = boolean;
 export type TInset = boolean;
+export type TRipple = boolean;
 
 export type TMySwitchProps = {
   modelValue: TModelValue;
@@ -12,4 +13,5 @@ export type TMySwitchProps = {
   disabled?: TDisabled;
   readonly?: TReadonly;
   inset?: TInset;
+  ripple?: TRipple;
 };

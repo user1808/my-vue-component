@@ -254,17 +254,23 @@ class RippleEffect {
 }
 
 export const useRippleDirective = () => {
-  let rippleEffectListener: (event: MouseEvent | TouchEvent) => void;
+  const rippleEffectListeners: Record<
+    string,
+    (event: MouseEvent | TouchEvent) => void
+  > = {};
 
   const addRippleEffect = ({
     target,
     binding,
   }: TAddRemoveRippleEffectArgs) => {
     const modifiers = RippleEffect.setModifiers(binding.modifiers);
-    rippleEffectListener = (event) => {
+    rippleEffectListeners[modifiers.event] = (event) => {
       RippleEffect.rippleEffect(event, target, binding, modifiers);
     };
-    target.addEventListener(modifiers.event, rippleEffectListener);
+    target.addEventListener(
+      modifiers.event,
+      rippleEffectListeners[modifiers.event],
+    );
   };
 
   const removeRippleEffect = ({
@@ -272,7 +278,10 @@ export const useRippleDirective = () => {
     binding,
   }: TAddRemoveRippleEffectArgs) => {
     const modifiers = RippleEffect.setModifiers(binding.modifiers);
-    target.removeEventListener(modifiers.event, rippleEffectListener);
+    target.removeEventListener(
+      modifiers.event,
+      rippleEffectListeners[modifiers.event],
+    );
   };
 
   const vRipple: ObjectDirective<HTMLElement> = {

@@ -43,6 +43,7 @@
                 :selected="selected"
                 :font-size="optionsFontSize"
                 :item-title="getItemTitle(item)"
+                :ripple="ripple"
                 @click="chooseItem(item)"
               >
                 <slot name="option" :item="item"></slot>
@@ -85,6 +86,7 @@ const props = withDefaults(defineProps<TMySelectProps<T>>(), {
   maxOptionItems: constants.DEFAULT_MAX_OPTION_ITEMS,
   clearable: constants.DEFAULT_CLEARABLE,
   disabled: constants.DEFAULT_DISABLED,
+  ripple: constants.DEFAULT_RIPPLE,
 });
 
 const selectedItem = ref<Absentable<T>>(props.modelValue) as Ref<

@@ -82,6 +82,7 @@ export const DefaultStory: Story = {
         :disabled="args.disabled"
         :bg-color="args.bgColor"
         :color="args.color"
+        :ripple="args.ripple"
       />`,
   }),
 };

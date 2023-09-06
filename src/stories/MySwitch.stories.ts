@@ -40,6 +40,11 @@ const meta: Meta<typeof MySwitch> = {
       description:
         'This value changes style of switch, placing the thumb inside the track. It is of boolean type.',
     },
+    ripple: {
+      control: 'boolean',
+      description:
+        'This is a boolean value that controls whether the switch have ripple effect. Default value is true.',
+    },
   },
   args: {
     modelValue: undefined,
@@ -47,6 +52,7 @@ const meta: Meta<typeof MySwitch> = {
     disabled: false,
     readonly: false,
     inset: false,
+    ripple: true,
   },
 };
 
@@ -69,6 +75,7 @@ export const DefaultStory: Story = {
         :disabled="args.disabled"
         :readonly="args.readonly"
         :inset="args.inset"
+        :ripple="args.ripple"
       />`,
   }),
 };

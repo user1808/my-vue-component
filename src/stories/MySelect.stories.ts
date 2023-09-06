@@ -72,6 +72,11 @@ const meta: Meta<typeof MySelect> = {
     option: {
       description: 'Slot for items in select options',
     },
+    ripple: {
+      control: 'boolean',
+      description:
+        'This is a boolean value that controls whether the select have ripple effect. Default value is true.',
+    },
   },
 };
 
@@ -101,6 +106,7 @@ export const DefaultStory: Story = {
         :maxOptionItems="args['maxOptionItems']"
         :clearable="args.clearable"
         :disabled="args.disabled"
+        :ripple="args.ripple"
       />`,
   }),
   argTypes: {
@@ -114,6 +120,7 @@ export const DefaultStory: Story = {
     maxOptionItems: 5,
     clearable: false,
     disabled: false,
+    ripple: true,
   },
 };
 
