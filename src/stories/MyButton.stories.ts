@@ -48,6 +48,10 @@ const meta: Meta<typeof MyButton> = {
       description:
         'This value changes color of button content (text). It is of string type, however to work correctly it should be either the hex value of color or a custom color name that is available in the selection within the "Color Select" story',
     },
+    default: {
+      description:
+        'Slot for button content. It can be either text or some html element.',
+    },
   },
   args: {
     flat: false,
