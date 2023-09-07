@@ -49,6 +49,7 @@ const meta: Meta<typeof MyButton> = {
         'This value changes color of button content (text). It is of string type, however to work correctly it should be either the hex value of color or a custom color name that is available in the selection within the "Color Select" story',
     },
     default: {
+      control: 'text',
       description:
         'Slot for button content. It can be either text or some html element.',
     },
@@ -67,6 +68,7 @@ const meta: Meta<typeof MyButton> = {
     ripple: true,
     disabled: false,
     bgColorVariant: 'background',
+    default: 'Button',
   },
 };
 
@@ -91,6 +93,6 @@ export const DefaultStory: Story = {
         :color="args.color"
         :ripple="args.ripple"
         :bg-color-variant="args.bgColorVariant"
-      />`,
+      >{{ args.default }}</MyButton>`,
   }),
 };
