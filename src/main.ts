@@ -1,8 +1,24 @@
 import './assets/main.scss';
 
-import { createApp } from 'vue';
-import App from './App.vue';
+import type { App } from 'vue';
 
-const app = createApp(App);
+import MyButton from './components/MyButton';
+import MyCheckbox from './components/MyCheckbox';
+import MyIcon from './components/MyIcon';
+import MySelect from './components/MySelect';
+import MySwitch from './components/MySwitch';
 
-app.mount('#app');
+export { MyButton, MyCheckbox, MyIcon, MySelect, MySwitch };
+
+export default {
+  install: (app: App) => {
+    app
+      .component('MyButton', MyButton)
+      .component('MyCheckbox', MyCheckbox)
+      .component('MyIcon', MyIcon)
+      .component('MySelect', () => {
+        return MySelect;
+      })
+      .component('MySwitch', MyCheckbox);
+  },
+};
