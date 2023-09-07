@@ -19,7 +19,7 @@
     }"
   >
     <span :class="{ 'my-btn__content--hover': contentHoverOpacity }">
-      <slot> Button </slot>
+      <slot></slot>
     </span>
   </button>
 </template>
