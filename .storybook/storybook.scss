@@ -1,0 +1,10 @@
+@use '../src/assets/colors.scss' as *;
+@use '../src/assets/ripple.scss' as *;
+
+body {
+  font-family: 'JetBrains Mono', monospace, Verdana , Arial, sans-serif !important;
+}
+
+button {
+  font-family: inherit;
+}

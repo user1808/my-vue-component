@@ -1,27 +1,2 @@
 @use './colors.scss' as *;
 @use './ripple.scss' as *;
-
-body {
-  font-family: 'JetBrains Mono', monospace, Verdana , Arial, sans-serif !important;
-}
-
-#app {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  @media (max-width: 750px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-  column-gap: 1rem;
-  row-gap: 4rem;
-  margin: 4rem 2rem;
-  & > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-button {
-  font-family: inherit;
-}
