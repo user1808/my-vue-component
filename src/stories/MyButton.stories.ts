@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import MyButton from '@/components/MyButton';
+import { colors } from '@/assets/colors/colors';
 
 const meta: Meta<typeof MyButton> = {
   title: 'Components/MyButton',
@@ -95,4 +96,26 @@ export const DefaultStory: Story = {
         :bg-color-variant="args.bgColorVariant"
       >{{ args.default }}</MyButton>`,
   }),
+};
+
+export const ColorSelectStory: Story = {
+  name: 'Color Story',
+  render: DefaultStory.render,
+  argTypes: {
+    flat: { table: { disable: true } },
+    withoutHoverColor: { table: { disable: true } },
+    contentHoverOpacity: { table: { disable: true } },
+    disabled: { table: { disable: true } },
+    ripple: { table: { disable: true } },
+    color: {
+      options: Object.keys(colors),
+      mapping: colors,
+      control: { type: 'select' },
+    },
+    bgColor: {
+      options: Object.keys(colors),
+      mapping: colors,
+      control: { type: 'select' },
+    },
+  },
 };
