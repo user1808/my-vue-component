@@ -1,5 +1,7 @@
 @use './utils/variables.style.scss' as vars;
 
+$color-on-hover: vars.$default-color-on-hover;
+
 .my-btn {
   $myBtnSelector: &;
 
@@ -23,7 +25,7 @@
   }
 
   &:hover:not(&--disabled) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 0 0);
+    background-image: linear-gradient(rgba($color-on-hover, 0.05) 0 0);
     box-shadow: vars.$hover-box-shadow;
     #{$myBtnSelector}__content--hover {
       opacity: 1;
