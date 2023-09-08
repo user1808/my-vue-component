@@ -2,25 +2,12 @@ import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import typescript2 from 'rollup-plugin-typescript2';
+import dts from 'vite-plugin-dts';
 import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    typescript2({
-      check: false,
-      tsconfigOverride: {
-        compilerOptions: {
-          sourceMap: true,
-          declaration: true,
-          declarationMap: true,
-        },
-      },
-      exclude: ['vite.config.ts'],
-    }),
-  ],
+  plugins: [vue(), dts()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -28,7 +15,7 @@ export default defineConfig({
   },
   build: {
     cssCodeSplit: false,
-    emptyOutDir: false,
+    emptyOutDir: true,
     lib: {
       entry: path.resolve(__dirname, 'src/main.ts'),
       name: 'MyVueComponent',
