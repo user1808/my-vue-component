@@ -17,6 +17,7 @@ $color-on-hover: vars.$default-color-on-hover;
   background-color: white;
   color: black;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
 
   transition: {
     property: box-shadow;

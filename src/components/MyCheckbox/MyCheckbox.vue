@@ -6,8 +6,7 @@
       'my-checkbox--readonly': readonly,
     }"
     @click="onCheckboxClicked"
-    v-ripple="ripple && !disabled"
-    v-ripple.touchstart="ripple && !disabled"
+    v-ripple.touchstart.mousedown="ripple && !disabled"
   >
     <input
       class="my-checkbox__input"
