@@ -27,7 +27,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o ./gh-pages/storybook",
+    "build-storybook": "storybook build -o ./gh-pages",
     "create-docs": "typedoc --tsconfig ./tsconfig.docs.json --out ./gh-pages/docs",
     "dev-create-docs": "typedoc --tsconfig ./tsconfig.docs.json --watch"
   },
