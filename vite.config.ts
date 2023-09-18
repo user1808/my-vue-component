@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
+      tsconfigPath: './tsconfig.app.json',
       exclude: ['src/stories', 'src/assets', 'src/composables'],
     }),
   ],

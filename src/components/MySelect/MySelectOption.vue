@@ -5,8 +5,7 @@
       'my-bg-grey-50 my-black': active,
       'my-bg-grey-100 my-grey-800': selected,
     }"
-    v-ripple="ripple"
-    v-ripple.touchstart="ripple"
+    v-ripple.touchstart.mousedown="ripple"
   >
     <div
       class="my-select-option__text"
