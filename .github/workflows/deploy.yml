@@ -39,11 +39,7 @@ jobs:
       - name: Upload Storybook artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "./storybook-static"
-      - name: Upload Docs artifact
-        uses: actions/upload-pages-artifact@v2
-        with: 
-          path: "./docs"
+          path: "./gh-pages"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
