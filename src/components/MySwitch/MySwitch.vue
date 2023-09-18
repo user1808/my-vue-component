@@ -23,8 +23,7 @@
         'switch-control--active': modelValue,
         'switch-control--indeterminate': indeterminateState,
       }"
-      v-ripple:absolute="ripple && !disabled"
-      v-ripple:absolute.touchstart="ripple && !disabled"
+      v-ripple:absolute.touchstart.mousedown="ripple && !disabled"
     >
       <input
         class="switch-control__input"
