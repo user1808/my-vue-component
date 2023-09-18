@@ -29,3 +29,6 @@ coverage
 
 # Typedoc
 docs
+
+# Storybook
+storybook-static
