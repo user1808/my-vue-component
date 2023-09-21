@@ -7,7 +7,7 @@
 export const useTypeGuards = () => {
   /**
    * Type Guard that checks whether a given value is an object.
-   * 
+   *
    * @param item - The item to be checked.
    * @returns `true` if the item is an object, otherwise `false`.
    */
