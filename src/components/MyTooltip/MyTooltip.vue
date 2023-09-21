@@ -1,24 +1,24 @@
 <template>
-  <div class="tooltip">
+  <div class="my-tooltip">
     <slot />
     <div
-      class="tooltip-box"
+      class="my-tooltip-box"
       :class="[
         {
-          'tooltip-box--hide-arrow': hideArrow,
-          'tooltip-box--always-show': alwaysShow,
-          'tooltip-box--disabled': disabled,
+          'my-tooltip-box--hide-arrow': hideArrow,
+          'my-tooltip-box--always-show': alwaysShow,
+          'my-tooltip-box--disabled': disabled,
         },
-        `tooltip-box--primary-${primaryPosition}`,
-        `tooltip-box--secondary-${secondaryPosition}`,
+        `my-tooltip-box--primary-${primaryPosition}`,
+        `my-tooltip-box--secondary-${secondaryPosition}`,
       ]"
     >
       <div
-        class="tooltip-box-content"
+        class="my-tooltip-box-content"
         :style="computedTooltipContentStyle"
       >
         <slot name="tooltip-content">
-          <span class="tooltip-box-content__default-text">
+          <span class="my-tooltip-box-content__default-text">
             {{ text }}
           </span>
         </slot>

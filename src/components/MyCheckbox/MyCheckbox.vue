@@ -43,6 +43,7 @@ import { useRippleDirective } from '@/composables/useRippleDirective';
 const { vRipple } = useRippleDirective();
 
 const props = withDefaults(defineProps<TMyCheckboxProps>(), {
+  modelValue: constants.DEFAULT_MODEL_VALUE,
   indeterminate: constants.DEFAULT_INDETERMINATE,
   disabled: constants.DEFAULT_DISABLED,
   readonly: constants.DEFAULT_READONLY,

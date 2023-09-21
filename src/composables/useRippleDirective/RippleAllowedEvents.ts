@@ -23,7 +23,7 @@ export type TAllowedEvents =
 export class RippleAllowedEventsGuard {
   /**
    * Type guard which checks if given event is allowed one
-   * 
+   *
    * @param event - The event name to check.
    * @returns `true` if the event is allowed, `false` otherwise.
    */

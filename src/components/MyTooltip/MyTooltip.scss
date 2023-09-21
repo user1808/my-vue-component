@@ -3,7 +3,7 @@
 $default-arrow-size: 8px !default;
 $default-tooltip-color: rgb(121, 121, 121) !default;
 
-.tooltip {
+.my-tooltip {
   $myTooltipSelector: &;
 
   position: relative;
