@@ -9,7 +9,7 @@ describe('MyButton', () => {
   it('renders the button with default props', () => {
     const wrapper = mount(MyButton);
 
-    expect(wrapper.find('button.my-btn').exists()).toBe(true);
+    expect(wrapper.find('button.my-bt').exists()).toBe(true);
 
     expect(wrapper.classes().join()).toStrictEqual('my-btn');
   });
