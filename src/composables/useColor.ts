@@ -106,10 +106,10 @@ export const useColor = () => {
 
   /**
    * Converts an RGBA color to RGB, which means both colors have the same look.
-   * 
+   *
    * @param rgbaColor - The RGBA color to convert.
    * @returns An RGB color object.
-   * 
+   *
    * @example
    * ```js
    * // Returns { r: 240, g: 232, b: 220 }
@@ -128,11 +128,11 @@ export const useColor = () => {
 
   /**
    * Calculates the contrast between two colors.
-   * 
+   *
    * @param color1 - The first color.
    * @param color2 - The second color.
    * @returns The contrast value as a number.
-   * 
+   *
    * $$contrast=\sqrt{(r_1 - r_2)^2 + (g_1 - g_2)^2 + (b_1 - b_2)^2}$$
    * where
    * $$r_1, r_2, g_1, g_2, b_1, b_2$$ are red, green and blue values of both colors
@@ -140,7 +140,7 @@ export const useColor = () => {
    * @example
    * ```js
    * // Returns ~115.866
-   * calculateContrast({ r: 120, g: 40, b: 100 }, { r: 20, g: 60, b: 45 }); 
+   * calculateContrast({ r: 120, g: 40, b: 100 }, { r: 20, g: 60, b: 45 });
    * ```
    */
   const calculateContrast = (

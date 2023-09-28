@@ -78,7 +78,7 @@ export class RippleEffect {
     private readonly modifiers: TRippleEffectModifiers,
   ) {}
 
-   /**
+  /**
    * Starts the ripple effect.
    */
   public start() {

@@ -1,4 +1,4 @@
-import MyTooltip from '@/components/MyTooltip/MyTooltip.vue';
+import MyTooltip from '@/components/MyTooltip';
 import MyButton from '@/components/MyButton';
 import type { Meta, StoryObj } from '@storybook/vue3';
 import MyIcon from '@/components/MyIcon';

@@ -6,11 +6,11 @@ type TIsInRange = boolean;
 export const useNumberCalculations = () => {
   /**
    * Determines whether a numeric value falls within a specified range.
-   * 
+   *
    * @param value - The numeric value to check.
    * @param min - The minimum value of the range (inclusive).
    * @param max - The maximum value of the range (inclusive).
-   * 
+   *
    * @returns A boolean indicating whether the value is within the specified range.
    */
   const isInRange = (

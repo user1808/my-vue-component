@@ -7,8 +7,16 @@ import MyCheckbox from './components/MyCheckbox';
 import MyIcon from './components/MyIcon';
 import MySelect from './components/MySelect';
 import MySwitch from './components/MySwitch';
+import MyTooltip from './components/MyTooltip';
 
-export { MyButton, MyCheckbox, MyIcon, MySelect, MySwitch };
+export {
+  MyButton,
+  MyCheckbox,
+  MyIcon,
+  MySelect,
+  MySwitch,
+  MyTooltip,
+};
 
 export default {
   install: (app: App) => {
@@ -19,6 +27,7 @@ export default {
       .component('MySelect', () => {
         return MySelect;
       })
-      .component('MySwitch', MyCheckbox);
+      .component('MySwitch', MyCheckbox)
+      .component('MyTooltip', MyTooltip);
   },
 };

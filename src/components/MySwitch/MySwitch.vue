@@ -1,15 +1,15 @@
 <template>
   <div
-    class="switch"
-    :class="{ 'switch--disabled': disabled }"
+    class="my-switch"
+    :class="{ 'my-switch--disabled': disabled }"
     @click="onSwitchClicked"
   >
     <div
-      class="switch__track"
+      class="my-switch__track"
       :class="[
         {
-          'switch__track--disabled': disabled,
-          'switch__track--inset': inset,
+          'my-switch__track--disabled': disabled,
+          'my-switch__track--inset': inset,
         },
         !isColorHex && color && modelValue ? `my-bg-${color}` : '',
       ]"
@@ -18,26 +18,27 @@
       }"
     />
     <div
-      class="switch-control"
+      class="my-switch-control"
       :class="{
-        'switch-control--active': modelValue,
-        'switch-control--indeterminate': indeterminateState,
+        'my-switch-control--active': modelValue,
+        'my-switch-control--indeterminate': indeterminateState,
       }"
       v-ripple:absolute.touchstart.mousedown="ripple && !disabled"
     >
       <input
-        class="switch-control__input"
-        :class="{ 'switch-control__input--disabled': disabled }"
+        class="my-switch-control__input"
+        :class="{ 'my-switch-control__input--disabled': disabled }"
         :value="!!modelValue"
         type="checkbox"
         :disabled="disabled"
       />
       <span
-        class="switch-control__thumb"
+        class="my-switch-control__thumb"
         :class="{
-          'switch-control__thumb--inset': inset,
-          'switch-control__thumb--inset-active': inset && modelValue,
-          'switch-control__thumb--disabled': disabled,
+          'my-switch-control__thumb--inset': inset,
+          'my-switch-control__thumb--inset-active':
+            inset && modelValue,
+          'my-switch-control__thumb--disabled': disabled,
         }"
       />
     </div>
@@ -59,6 +60,7 @@ const { isHexColorValue } = useColor();
 const { vRipple } = useRippleDirective();
 
 const props = withDefaults(defineProps<TMySwitchProps>(), {
+  modelValue: constants.DEFAULT_MODEL_VALUE,
   indeterminate: constants.DEFAULT_INDETERMINATE,
   disabled: constants.DEFAULT_DISABLED,
   readonly: constants.DEFAULT_READONLY,
