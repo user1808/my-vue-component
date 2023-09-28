@@ -7,7 +7,7 @@ export type TInset = boolean;
 export type TRipple = boolean;
 
 export type TMySwitchProps = {
-  modelValue: TModelValue;
+  modelValue?: TModelValue;
   indeterminate?: TIndeterminate;
   color?: TColor;
   disabled?: TDisabled;

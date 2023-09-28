@@ -13,7 +13,7 @@ const meta: Meta<typeof MyCheckbox> = {
     modelValue: {
       control: false,
       description:
-        'This is v-model value of the checkbox. It is required and is of a type of boolean | undefined. Undefined is treated like false value.',
+        'This is v-model value of the checkbox. It is of a type of boolean | undefined. Undefined is treated like false value. Default value is undefined.',
     },
     indeterminate: {
       control: 'boolean',

@@ -13,7 +13,7 @@ const meta: Meta<typeof MySwitch> = {
     modelValue: {
       control: false,
       description:
-        'This is v-model value of the switch. It is required and is a type of boolean | undefined. Undefined is treated like false value.',
+        'This is v-model value of the switch. It is a type of boolean | undefined. Undefined is treated like false value. Default value is undefined',
     },
     indeterminate: {
       control: 'boolean',
