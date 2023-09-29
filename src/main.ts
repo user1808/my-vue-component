@@ -1,13 +1,16 @@
 import './assets/main.scss';
 
+import { createApp } from 'vue';
 import type { App } from 'vue';
 
+import TestApp from './TestApp.vue';
 import MyButton from './components/MyButton';
 import MyCheckbox from './components/MyCheckbox';
 import MyIcon from './components/MyIcon';
 import MySelect from './components/MySelect';
 import MySwitch from './components/MySwitch';
 import MyTooltip from './components/MyTooltip';
+import MyModal from './components/MyModal';
 
 export {
   MyButton,
@@ -16,7 +19,11 @@ export {
   MySelect,
   MySwitch,
   MyTooltip,
+  MyModal,
 };
+
+const app = createApp(TestApp);
+app.mount('#app');
 
 export default {
   install: (app: App) => {
@@ -28,6 +35,7 @@ export default {
         return MySelect;
       })
       .component('MySwitch', MyCheckbox)
-      .component('MyTooltip', MyTooltip);
+      .component('MyTooltip', MyTooltip)
+      .component('MyModal', MyModal);
   },
 };
