@@ -1,4 +1,5 @@
 @use 'utils/variables.style.scss' as vars;
+@use 'utils/mixins.style.scss' as mxns;
 @use '../../assets/mixins/custom-scrollbar.scss' as *;
 
 .modal-background-transition {
@@ -28,25 +29,33 @@
 .modal-dialog-transition {
   &-enter {
     transition: {
-      property: opacity, scale, width, height;
+      property: opacity, scale, width, height, transform;
       timing-function: cubic-bezier(0, 0, 0.2, 1);
       duration: 300ms;
     }
 
-    &-from {
+    &-central-from {
       opacity: 0;
       scale: 95%;
     }
 
-    &-to {
+    &-bottom-from {
+      transform: translateY(100%);
+    }
+
+    &-central-to {
       opacity: 100%;
       scale: 100%;
+    }
+
+    &-bottom-to {
+      transform: translateY(0);
     }
   }
 
   &-leave {
     transition: {
-      property: opacity, scale, width, height;
+      property: opacity, scale, width, height, transform;
       timing-function: cubic-bezier(0.4, 0, 1, 1);
       duration: 200ms;
     }
@@ -64,71 +73,26 @@
     background-color: vars.$default-modal-background;
   }
 
-  &-content {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    overflow-y: auto;
+  &-central-wrapper {
+    @include mxns.modal-style-without-modifiers;
+  }
 
+  &-bottom-wrapper {
+    @include mxns.modal-style-without-modifiers;
     &-container {
-      display: flex;
-      min-height: 100%;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
-
+      align-items: start;
       &-panel {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        overflow: hidden;
-        background-color: white;
-        padding: vars.$default-modal-panel-padding 2.75rem;
-        text-align: left;
-        border-radius: 0.5rem;
-        margin: vars.$default-modal-panel-margin;
-        max-width: 42rem;
-        min-width: 8rem;
+        border-radius: 0.5rem 0.5rem 0 0;
+        margin: vars.$default-top-margin-botton-modal 0 0 0;
+        max-width: unset;
+        min-width: unset;
         width: 100%;
-        max-height: calc(100vh - (2 * vars.$default-modal-panel-padding + 2 * vars.$default-modal-panel-margin));
-        min-height: 8rem;
-        height: 100%;
-        row-gap: 1.25rem;
+        max-height: unset;
+        min-height: calc((100vh - vars.$default-top-margin-botton-modal) - (2 * vars.$default-modal-panel-padding));
+        height: calc((100vh - vars.$default-top-margin-botton-modal) - (2 * vars.$default-modal-panel-padding));
 
-        &-close {
-          position: absolute;
-          top: 0.5rem;
-          right: 0.5rem;
-
-          &__btn {
-            border-radius: 9999px;
-            padding: 0.5rem;
-          }
-        }
-
-        &__title {
-          position: sticky;
-          display: inline;
-          height: fit-content;
-          font-size: 1.25rem;
-          line-height: 1.75rem;
-          font-weight: 700;
-          margin: 0;
-          width: 100%;
-          word-break: break-all;
-        }
-
-        &__content {
-          overflow-y: auto;
-          flex-grow: 1;
-
-          @include custom-scrollbar;
-        }
-
-        &--resizable {
-          resize: both;
-          overflow: hidden;
+        &--scrollable {
+          height: 100%;
         }
       }
     }

@@ -6,6 +6,9 @@
       :hide-title="false"
       resizable
       hide-close-icon
+      bottom-type-scrollable
+      type="bottom"
+      title="Test"
     >
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt at
       totam numquam. Voluptatibus sequi tempora in! Cumque voluptas

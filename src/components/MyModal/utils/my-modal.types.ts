@@ -6,6 +6,8 @@ type TSize = number;
 export type TResizable = boolean;
 export type TStayOpened = boolean;
 type TColor = string;
+export type TType = 'central' | 'bottom';
+export type TBottomTypeScrollable = boolean;
 
 export type TMyModalProps = {
   modelValue: TModelValue;
@@ -22,4 +24,6 @@ export type TMyModalProps = {
   stayOpened?: TStayOpened;
   bgColor?: TColor;
   color?: TColor;
+  type?: TType;
+  bottomTypeScrollable?: TBottomTypeScrollable;
 };

@@ -1,0 +1,75 @@
+@use "variables.style.scss" as vars;
+@use "../../../assets/mixins/custom-scrollbar.scss" as *;
+
+@mixin modal-style-without-modifiers {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+
+  &-container {
+    display: flex;
+    min-height: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    &-panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      background-color: white;
+      padding: vars.$default-modal-panel-padding 2.75rem;
+      text-align: left;
+      border-radius: 0.5rem;
+      margin: vars.$default-modal-panel-margin;
+      max-width: 42rem;
+      min-width: 8rem;
+      width: 100%;
+      max-height: calc(100vh - (2 * vars.$default-modal-panel-padding + 2 * vars.$default-modal-panel-margin));
+      min-height: 8rem;
+      height: 100%;
+      row-gap: 1.25rem;
+      box-shadow:
+        0 20px 25px -5px rgb(0 0 0 / 0.1),
+        0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+      &-close {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+
+        &__btn {
+          border-radius: 9999px;
+          padding: 0.5rem;
+        }
+      }
+
+      &__title {
+        position: sticky;
+        display: inline;
+        height: fit-content;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+        margin: 0;
+        width: 100%;
+        word-break: break-all;
+      }
+
+      &__content {
+        overflow-y: auto;
+        flex-grow: 1;
+
+        @include custom-scrollbar;
+      }
+
+      &--resizable {
+        resize: both;
+        overflow: hidden;
+      }
+    }
+  }
+}

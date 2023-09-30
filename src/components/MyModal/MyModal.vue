@@ -12,25 +12,27 @@
       >
         <div class="my-modal-background" />
       </TransitionChild>
-      <div class="my-modal-content">
-        <div class="my-modal-content-container">
+      <div :class="`my-modal-${type}-wrapper`">
+        <div :class="`my-modal-${type}-wrapper-container`">
           <TransitionChild
             as="template"
             enter="modal-dialog-transition-enter"
-            enter-from="modal-dialog-transition-enter-from"
-            enter-to="modal-dialog-transition-enter-to"
+            :enter-from="`modal-dialog-transition-enter-${type}-from`"
+            :enter-to="`modal-dialog-transition-enter-${type}-to`"
             leave="modal-dialog-transition-leave"
-            leave-from="modal-dialog-transition-enter-to"
-            leave-to="modal-dialog-transition-enter-from"
+            :leave-from="`modal-dialog-transition-enter-${type}-to`"
+            :leave-to="`modal-dialog-transition-enter-${type}-from`"
             @after-leave="emitModalClosed()"
             @after-enter="emitModalOpened()"
           >
             <DialogPanel
-              class="my-modal-content-container-panel"
               :class="[
+                `my-modal-${type}-wrapper-container-panel`,
                 {
-                  'my-modal-content-container-panel--resizable':
-                    resizable,
+                  'my-modal-central-wrapper-container-panel--resizable':
+                    resizable && isCentral,
+                  'my-modal-bottom-wrapper-container-panel--scrollable':
+                    bottomTypeScrollable && !isCentral,
                 },
                 !isColorHex && color ? `my-${color}` : undefined,
                 !isBgColorHex && bgColor
@@ -41,11 +43,11 @@
             >
               <div
                 v-if="!hideCloseIcon"
-                class="my-modal-content-container-panel-close"
+                :class="`my-modal-${type}-wrapper-container-panel-close`"
               >
                 <MyButton
                   flat
-                  class="my-modal-content-container-panel-close__btn"
+                  :class="`my-modal-${type}-wrapper-container-panel-close__btn`"
                   @click="emitModelValue(false)"
                   :bg-color="bgColor"
                 >
@@ -58,13 +60,15 @@
               </div>
               <DialogTitle
                 v-if="!hideTitle && (title || slots['modal-title'])"
-                class="my-modal-content-container-panel__title"
+                :class="`my-modal-${type}-wrapper-container-panel__title`"
               >
                 <slot name="modal-title">
                   {{ title }}
                 </slot>
               </DialogTitle>
-              <div class="my-modal-content-container-panel__content">
+              <div
+                :class="`my-modal-${type}-wrapper-container-panel__content`"
+              >
                 <slot />
               </div>
               <div>
@@ -102,6 +106,8 @@ const props = withDefaults(defineProps<TMyModalProps>(), {
   hideTitle: constants.DEFAULT_HIDE_TITLE,
   resizable: constants.DEFAULT_RESIZABLE,
   stayOpened: constants.DEFAULT_STAY_OPENED,
+  type: constants.DEFAULT_TYPE,
+  bottomTypeScrollable: constants.DEFAULT_BTM_TYPE_SCROLLABLE,
 });
 
 const emits = defineEmits<{
@@ -135,15 +141,28 @@ const isBgColorHex = computed(() => isHexColorValue(props.bgColor));
 
 const computedStyle = computed<StyleValue>(() => {
   return {
-    width: props.width ? `${props.width}px` : undefined,
-    minWidth: props.minWidth ? `${props.minWidth}px` : undefined,
-    maxWidth: props.maxWidth ? `${props.maxWidth}px` : undefined,
-    height: props.height ? `${props.height}px` : undefined,
-    minHeight: props.minHeight ? `${props.minHeight}px` : undefined,
-    maxHeight: props.maxHeight ? `${props.maxHeight}px` : undefined,
+    width: props.width && isCentral ? `${props.width}px` : undefined,
+    minWidth:
+      props.minWidth && isCentral ? `${props.minWidth}px` : undefined,
+    maxWidth:
+      props.maxWidth && isCentral ? `${props.maxWidth}px` : undefined,
+    height:
+      props.height && isCentral ? `${props.height}px` : undefined,
+    minHeight:
+      props.minHeight && isCentral
+        ? `${props.minHeight}px`
+        : undefined,
+    maxHeight:
+      props.maxHeight && isCentral
+        ? `${props.maxHeight}px`
+        : undefined,
     backgroundColor: isBgColorHex.value ? props.bgColor : undefined,
     color: isColorHex.value ? props.color : undefined,
   };
+});
+
+const isCentral = computed(() => {
+  return props.type === 'central';
 });
 </script>
 

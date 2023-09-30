@@ -33,37 +33,37 @@ const meta: Meta<typeof MyModal> = {
     maxWidth: {
       control: 'number',
       description:
-        'The maximum width of the modal dialog. It is of number type and allows you to limit the maximum width (in pixels) of the modal content. Default value is set in CSS and equals 42rem.',
+        'The maximum width of the central modal dialog. It is of number type and allows you to limit the maximum width (in pixels) of the modal content. Default value is set in CSS and equals 42rem.',
     },
     minWidth: {
       control: 'number',
       description:
-        'The minimum width of the modal dialog. It is of number type and allows you to set a minimum width (in pixels) for the modal content. Default value is set in CSS and equals 8rem.',
+        'The minimum width of the central modal dialog. It is of number type and allows you to set a minimum width (in pixels) for the modal content. Default value is set in CSS and equals 8rem.',
     },
     width: {
       control: 'number',
       description:
-        'The width of the modal dialog. It is of number type and specifies the width (in pixels) of the modal content.',
+        'The width of the central modal dialog. It is of number type and specifies the width (in pixels) of the modal content.',
     },
     maxHeight: {
       control: 'number',
       description:
-        'The maximum height of the modal dialog. It is of number type and allows you to limit the maximum height (in pixels) of the modal content. Default value is set in CSS and equals 100vh - 8rem.',
+        'The maximum height of the central modal dialog. It is of number type and allows you to limit the maximum height (in pixels) of the modal content. Default value is set in CSS and equals 100vh - 8rem.',
     },
     minHeight: {
       control: 'number',
       description:
-        'The minimum height of the modal dialog. It is of number type and allows you to set a minimum height (in pixels) for the modal content. Default value is set in CSS and equals 8rem.',
+        'The minimum height of the central modal dialog. It is of number type and allows you to set a minimum height (in pixels) for the modal content. Default value is set in CSS and equals 8rem.',
     },
     height: {
       control: 'number',
       description:
-        'The height of the modal dialog. It is of number type and specifies the height (in pixels) of the modal content.',
+        'The height of the central modal dialog. It is of number type and specifies the height (in pixels) of the modal content.',
     },
     resizable: {
       control: 'boolean',
       description:
-        'If set to true, it allows the modal to be resized by the user. It is of boolean type. Default value is false.',
+        'If set to true, it allows the central modal to be resized by the user. It is of boolean type. Default value is false.',
     },
     stayOpened: {
       control: 'boolean',
@@ -79,6 +79,17 @@ const meta: Meta<typeof MyModal> = {
       control: 'color',
       description:
         'The text color of the modal content. It is of string type and should be either the hex value of a color or a custom color name.',
+    },
+    type: {
+      options: ['central', 'bottom'],
+      control: { type: 'radio' },
+      description:
+        "This prop determines the presentation style of the modal. You have two options to choose from: 'central' and 'bottom.'\n- When set to 'central,' the modal is centered on the page. You can customize its size using related props described above, and it can be made resizable. \n- In contrast, selecting 'bottom' places the modal at the bottom of the viewport, covering its entire width. While this type doesn't support resizing, you can choose whether to enable scrolling for the entire modal or just its content. <br />You can explore these scenarios in the Modal Types story. Typically, 'central' is used for desktop screens, while 'bottom' is favored for mobile devices. The default value is 'central.'",
+    },
+    bottomTypeScrollable: {
+      control: 'boolean',
+      description:
+        "Use this prop to control the scroll behavior of a 'bottom' modal. When set to 'true,' the entire modal, including the title and footer, becomes scrollable. However, when set to 'false,' only the content within the modal is scrollable, keeping the title and footer sticky at the top and bottom, respectively. The default value is 'false.'",
     },
     onModalClosed: {
       description:
@@ -113,6 +124,8 @@ const meta: Meta<typeof MyModal> = {
     stayOpened: false,
     bgColor: undefined,
     color: undefined,
+    type: 'central',
+    bottomTypeScrollable: false,
   },
 };
 
@@ -128,7 +141,9 @@ export const DefaultStory: Story = {
       const openModal = () => {
         model.value = !model.value;
       };
-      return { args, model, openModal };
+      const content =
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt at totam numquam. Voluptatibus sequi tempora in! Cumque voluptas dolore voluptatum vel, perferendis debitis aut, aliquam tempora repellat, incidunt ducimus quis?';
+      return { args, model, openModal, content };
     },
     template: `
       <div>
@@ -150,8 +165,10 @@ export const DefaultStory: Story = {
           :stay-opened="args.stayOpened"
           :bg-color="args.bgColor"
           :color="args.color"
+          :type="args.type"
+          :bottom-type-scrollable="args.bottomTypeScrollable"
         >
-          Content Slot
+          {{ content }}
           <template #modal-footer>
             Footer Slot
           </template>
@@ -176,6 +193,10 @@ export const ConfigureHeaderStory: Story = {
     stayOpened: { table: { disable: true } },
     bgColor: { table: { disable: true } },
     color: { table: { disable: true } },
+    type: { table: { disable: true } },
+    bottomTypeScrollable: { table: { disable: true } },
+    onModalClosed: { table: { disable: true } },
+    onModalOpened: { table: { disable: true } },
     'modal-footer': { table: { disable: true } },
     'modal-title': { table: { disable: true } },
     default: { table: { disable: true } },
@@ -190,12 +211,12 @@ export const SizesStory: Story = {
     title: { table: { disable: true } },
     hideTitle: { table: { disable: true } },
     hideCloseIcon: { table: { disable: true } },
-    maxWidth: { control: 'number' },
-    minWidth: { control: 'number' },
-    width: { control: 'number' },
-    maxHeight: { control: 'number' },
-    minHeight: { control: 'number' },
-    height: { control: 'number' },
+    maxWidth: { table: { disable: false } },
+    minWidth: { table: { disable: false } },
+    width: { table: { disable: false } },
+    maxHeight: { table: { disable: false } },
+    minHeight: { table: { disable: false } },
+    height: { table: { disable: false } },
   },
   args: {
     maxWidth: 600,
@@ -212,7 +233,7 @@ export const ResizableStory: Story = {
   render: DefaultStory.render,
   argTypes: {
     ...SizesStory.argTypes,
-    resizable: { control: 'boolean' },
+    resizable: { table: { disable: false } },
   },
   args: {
     ...SizesStory.args,
@@ -228,7 +249,7 @@ export const StayOpenedStory: Story = {
     title: { table: { disable: true } },
     hideTitle: { table: { disable: true } },
     hideCloseIcon: { table: { disable: true } },
-    stayOpened: { control: 'boolean' },
+    stayOpened: { table: { disable: false } },
   },
 };
 
@@ -305,5 +326,15 @@ export const ColorStory: Story = {
   args: {
     bgColor: 'grey-400',
     color: 'white',
+  },
+};
+
+export const ModalTypesStory: Story = {
+  name: 'Modal Types',
+  render: DefaultStory.render,
+  argTypes: {
+    ...ResizableStory.argTypes,
+    type: { table: { disable: false } },
+    bottomTypeScrollable: { table: { disable: false } },
   },
 };
