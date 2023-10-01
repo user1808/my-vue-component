@@ -1,9 +1,7 @@
 import './assets/main.scss';
 
-import { createApp } from 'vue';
 import type { App } from 'vue';
 
-import TestApp from './TestApp.vue';
 import MyButton from './components/MyButton';
 import MyCheckbox from './components/MyCheckbox';
 import MyIcon from './components/MyIcon';
@@ -21,9 +19,6 @@ export {
   MyTooltip,
   MyModal,
 };
-
-const app = createApp(TestApp);
-app.mount('#app');
 
 export default {
   install: (app: App) => {
