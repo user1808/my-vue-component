@@ -8,6 +8,7 @@ describe('MyTooltip', () => {
     const wrapper = mount(MyTooltip, {
       slots: {
         default: MyButton,
+        'tooltip-content': () => undefined,
       },
     });
 

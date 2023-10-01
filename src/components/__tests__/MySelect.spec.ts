@@ -62,19 +62,19 @@ describe('MySelect', () => {
   });
 
   it('shows that select is working properly', async () => {
-    const items = getArrayWithRandomValues({
+    const items = <Array<number>>getArrayWithRandomValues({
       minLength: 1,
       maxLength: 15,
       type: 'int',
     });
     const selectedItemIdx = faker.number.int(items.length - 1);
 
-    const wrapper: VueWrapper = mount(MySelect, {
+    const wrapper: VueWrapper = mount(MySelect<number>, {
       props: {
         items: items,
         modelValue: undefined,
-        'onUpdate:modelValue': (newValue: number) => {
-          wrapper.setProps({ modelValue: newValue });
+        'onUpdate:modelValue': (value: Nullable<number>) => {
+          wrapper.setProps({ modelValue: value });
         },
       },
     });
@@ -106,7 +106,9 @@ describe('MySelect', () => {
       props: {
         items: items,
         modelValue: undefined,
-        'onUpdate:modelValue': (newValue: number) => {
+        'onUpdate:modelValue': (
+          newValue: Nullable<{ id: number; name: string }>,
+        ) => {
           wrapper.setProps({ modelValue: newValue });
         },
         itemTitle: 'name',
