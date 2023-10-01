@@ -1,0 +1,20 @@
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    max-width: 0.25rem;
+    max-height: 0.25rem;
+
+    &-track {
+      background: white;
+      margin: 0.25rem 0;
+    }
+
+    &-thumb {
+      background: #b0b0b0;
+      border-radius: 2rem;
+
+      &:hover {
+        background: #8f8f8f;
+      }
+    }
+  }
+}

@@ -44,6 +44,10 @@ const props = withDefaults(defineProps<TMyButtonProps>(), {
   bgColorVariant: constants.DEFAULT_VARIANT,
 });
 
+defineSlots<{
+  default(): any;
+}>();
+
 const isBgColorHex = computed(() => isHexColorValue(props.bgColor));
 const isColorHex = computed(() => isHexColorValue(props.color));
 

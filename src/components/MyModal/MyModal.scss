@@ -1,0 +1,100 @@
+@use 'utils/variables.style.scss' as vars;
+@use 'utils/mixins.style.scss' as mxns;
+@use '../../assets/mixins/custom-scrollbar.scss' as *;
+
+.modal-background-transition {
+  &-enter {
+    transition: {
+      property: opacity;
+      timing-function: linear;
+      duration: 300ms;
+    }
+    &-from {
+      opacity: 0;
+    }
+    &-to {
+      opacity: 100%;
+    }
+  }
+
+  &-leave {
+    transition: {
+      property: opacity;
+      timing-function: linear;
+      duration: 200ms;
+    }
+  }
+}
+
+.modal-dialog-transition {
+  &-enter {
+    transition: {
+      property: opacity, scale, width, height, transform;
+      timing-function: cubic-bezier(0, 0, 0.2, 1);
+      duration: 300ms;
+    }
+
+    &-central-from {
+      opacity: 0;
+      scale: 95%;
+    }
+
+    &-bottom-from {
+      transform: translateY(100%);
+    }
+
+    &-central-to {
+      opacity: 100%;
+      scale: 100%;
+    }
+
+    &-bottom-to {
+      transform: translateY(0);
+    }
+  }
+
+  &-leave {
+    transition: {
+      property: opacity, scale, width, height, transform;
+      timing-function: cubic-bezier(0.4, 0, 1, 1);
+      duration: 200ms;
+    }
+  }
+}
+
+.my-modal {
+  position: relative;
+  z-index: 50;
+
+  &-background {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: vars.$default-modal-background;
+  }
+
+  &-central-wrapper {
+    @include mxns.modal-style-without-modifiers;
+  }
+
+  &-bottom-wrapper {
+    @include mxns.modal-style-without-modifiers;
+    &-container {
+      align-items: start;
+      &-panel {
+        border-radius: 0.5rem 0.5rem 0 0;
+        margin: vars.$default-top-margin-botton-modal 0 0 0;
+        max-width: unset;
+        min-width: unset;
+        width: 100%;
+        max-height: unset;
+        min-height: calc((100vh - vars.$default-top-margin-botton-modal) - (2 * vars.$default-modal-panel-padding));
+        height: calc((100vh - vars.$default-top-margin-botton-modal) - (2 * vars.$default-modal-panel-padding));
+
+        &--scrollable {
+          height: 100%;
+        }
+      }
+    }
+  }
+}

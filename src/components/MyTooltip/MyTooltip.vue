@@ -43,6 +43,11 @@ const props = withDefaults(defineProps<TMyTooltipProps>(), {
   disabled: constants.DEFAULT_DISABLED,
 });
 
+defineSlots<{
+  default(): any;
+  ['tooltip-content'](): any;
+}>();
+
 const computedTooltipContentStyle = computed<StyleValue>(() => {
   return {
     maxHeight: convertSizeProp(props.maxHeight),
