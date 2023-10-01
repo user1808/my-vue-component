@@ -8,6 +8,7 @@ import MyIcon from './components/MyIcon';
 import MySelect from './components/MySelect';
 import MySwitch from './components/MySwitch';
 import MyTooltip from './components/MyTooltip';
+import MyModal from './components/MyModal';
 
 export {
   MyButton,
@@ -16,6 +17,7 @@ export {
   MySelect,
   MySwitch,
   MyTooltip,
+  MyModal,
 };
 
 export default {
@@ -28,6 +30,7 @@ export default {
         return MySelect;
       })
       .component('MySwitch', MyCheckbox)
-      .component('MyTooltip', MyTooltip);
+      .component('MyTooltip', MyTooltip)
+      .component('MyModal', MyModal);
   },
 };
